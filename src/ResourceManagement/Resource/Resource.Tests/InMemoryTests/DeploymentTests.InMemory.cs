@@ -21,8 +21,8 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Microsoft.Rest;
-using Microsoft.Azure.Management.Resources;
-using Microsoft.Azure.Management.Resources.Models;
+using Microsoft.Azure.Management.ResourceManager;
+using Microsoft.Azure.Management.ResourceManager.Models;
 using Microsoft.Rest.Azure.OData;
 
 namespace ResourceGroups.Tests
@@ -653,6 +653,23 @@ namespace ResourceGroups.Tests
 
             Assert.Throws<Microsoft.Rest.ValidationException>(() => client.Deployments.Cancel(null, "bar"));
             Assert.Throws<Microsoft.Rest.ValidationException>(() => client.Deployments.Cancel("foo", null));
+        }
+
+        [Fact]
+        public void DeploymentTestsWithoutModeThrowsExceptions()
+        {
+            var handler = new RecordedDelegatingHandler();
+            var client = GetResourceManagementClient(handler);
+
+            var deployment = new Deployment
+            {
+                Properties = new DeploymentProperties
+                {
+                    Template = "{foo:1}",
+                    Parameters = "{bar:1}"
+                }
+            };
+            Assert.Throws<Microsoft.Rest.ValidationException>(() => client.Deployments.CreateOrUpdate("foo", "bar", deployment));
         }
 
         [Fact]

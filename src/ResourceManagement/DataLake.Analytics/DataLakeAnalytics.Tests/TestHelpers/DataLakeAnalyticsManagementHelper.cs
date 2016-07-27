@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-using Microsoft.Azure.Management.Resources;
-using Microsoft.Azure.Management.Resources.Models;
+using Microsoft.Azure.Management.ResourceManager;
+using Microsoft.Azure.Management.ResourceManager.Models;
 using Microsoft.Azure.Management.Storage;
 using Microsoft.Azure.Management.Storage.Models;
 using System;
@@ -151,7 +151,11 @@ namespace DataLakeAnalytics.Tests
             var stoInput = new StorageAccountCreateParameters
             {
                 Location = location,
-                AccountType = AccountType.StandardGRS
+                Kind = Kind.Storage,
+                Sku = new Microsoft.Azure.Management.Storage.Models.Sku
+                {
+                    Name = SkuName.StandardGRS
+                }
             };
 
 
@@ -159,7 +163,7 @@ namespace DataLakeAnalytics.Tests
             storageManagementClient.StorageAccounts.Create(resourceGroupName, storageAccountName, stoInput);
 
             // retrieve the storage account primary access key
-            var accessKey = storageManagementClient.StorageAccounts.ListKeys(resourceGroupName, storageAccountName).Key1;
+            var accessKey = storageManagementClient.StorageAccounts.ListKeys(resourceGroupName, storageAccountName).Keys[0].Value;
             ThrowIfTrue(string.IsNullOrEmpty(accessKey), "storageManagementClient.StorageAccounts.ListKeys returned null.");
 
             // set the storage account suffix
@@ -233,7 +237,7 @@ namespace DataLakeAnalytics.Tests
             return datalakeStoreEndpoint;
         }
 
-        public void CreateCatalog(string resourceGroupName, string dataLakeAnalyticsAccountName, string dbName,
+        public Guid CreateCatalog(string resourceGroupName, string dataLakeAnalyticsAccountName, string dbName,
             string tableName, string tvfName, string viewName, string procName)
         {
             // build a simple catalog that can be used to retrieve items.
@@ -252,8 +256,11 @@ CREATE TABLE {0}.dbo.{1}
         ClickedUrls     string,
     INDEX idx1 //Name of index
     CLUSTERED (Region ASC) //Column to cluster by
-    PARTITIONED BY HASH (Region) //Column to partition by
+    PARTITIONED BY BUCKETS (UserId) HASH (Region) //Column to partition by
 );
+
+ALTER TABLE {0}.dbo.{1} ADD IF NOT EXISTS PARTITION (1);
+
 DROP FUNCTION IF EXISTS {0}.dbo.{2};
 
 //create table weblogs on space-delimited website log data
@@ -328,10 +335,10 @@ AS BEGIN
   T(a, b);
 END;", dbName, tableName, tvfName, viewName, procName);
 
-            RunJobToCompletion(dataLakeAnalyticsJobManagementClient, dataLakeAnalyticsAccountName, TestUtilities.GenerateGuid(), scriptToRun);
+            return RunJobToCompletion(dataLakeAnalyticsJobManagementClient, dataLakeAnalyticsAccountName, TestUtilities.GenerateGuid(), scriptToRun);
         }
 
-        internal void RunJobToCompletion(DataLakeAnalyticsJobManagementClient jobClient, string dataLakeAnalyticsAccountName, Guid jobIdToUse, string scriptToRun)
+        internal Guid RunJobToCompletion(DataLakeAnalyticsJobManagementClient jobClient, string dataLakeAnalyticsAccountName, Guid jobIdToUse, string scriptToRun)
         { 
             var createOrBuildParams = new JobInformation
             {
@@ -342,14 +349,15 @@ END;", dbName, tableName, tvfName, viewName, procName);
                 {
                     // Type = JobType.USql,
                     Script = scriptToRun
-                }
+                },
+                JobId = jobIdToUse
             };
-            var jobCreateResponse = jobClient.Job.Create(jobIdToUse, createOrBuildParams, dataLakeAnalyticsAccountName);
+            var jobCreateResponse = jobClient.Job.Create(dataLakeAnalyticsAccountName, jobIdToUse, createOrBuildParams);
 
             Assert.NotNull(jobCreateResponse);
 
             // Poll the job until it finishes
-            var getJobResponse = jobClient.Job.Get(jobCreateResponse.JobId.GetValueOrDefault(), dataLakeAnalyticsAccountName);
+            var getJobResponse = jobClient.Job.Get(dataLakeAnalyticsAccountName, jobCreateResponse.JobId.GetValueOrDefault());
             Assert.NotNull(getJobResponse);
 
             int maxWaitInSeconds = 180; // 3 minutes should be long enough
@@ -359,7 +367,7 @@ END;", dbName, tableName, tvfName, viewName, procName);
                 // wait 5 seconds before polling again
                 TestUtilities.Wait(5000);
                 curWaitInSeconds += 5;
-                getJobResponse = jobClient.Job.Get(jobCreateResponse.JobId.GetValueOrDefault(), dataLakeAnalyticsAccountName);
+                getJobResponse = jobClient.Job.Get(dataLakeAnalyticsAccountName, jobCreateResponse.JobId.GetValueOrDefault());
                 Assert.NotNull(getJobResponse);
             }
 
@@ -372,6 +380,7 @@ END;", dbName, tableName, tvfName, viewName, procName);
                     "Job: {0} did not return success. Current job state: {1}. Actual result: {2}. Error (if any): {3}",
                     getJobResponse.JobId, getJobResponse.State, getJobResponse.Result,
                     getJobResponse.ErrorMessage != null && getJobResponse.ErrorMessage.Count > 0 ? getJobResponse.ErrorMessage[0].Details : "no error information returned"));
+            return getJobResponse.JobId.GetValueOrDefault();
         }
     }
 }

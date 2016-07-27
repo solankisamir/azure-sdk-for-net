@@ -55,30 +55,32 @@ namespace DataLakeAnalytics.Tests
                         // TODO: figure out why this is no longer showing up as a property
                         // Type = JobType.USql, 
                         Script = "DROP DATABASE IF EXISTS testdb; CREATE DATABASE testdb;"
-                    }
+                    },
+                    JobId = jobId
                 };
 
-                var jobCreateResponse = clientToUse.Job.Create(jobId, jobToSubmit, commonData.SecondDataLakeAnalyticsAccountName);
+                var jobCreateResponse = clientToUse.Job.Create(commonData.SecondDataLakeAnalyticsAccountName, jobId, jobToSubmit);
 
                 Assert.NotNull(jobCreateResponse);
 
                 // Cancel the job
-                clientToUse.Job.Cancel(jobCreateResponse.JobId.GetValueOrDefault(), commonData.SecondDataLakeAnalyticsAccountName);
+                clientToUse.Job.Cancel(commonData.SecondDataLakeAnalyticsAccountName, jobCreateResponse.JobId.GetValueOrDefault());
 
                 // Get the job and ensure that it says it was cancelled.
-                var getCancelledJobResponse = clientToUse.Job.Get(jobCreateResponse.JobId.GetValueOrDefault(), commonData.SecondDataLakeAnalyticsAccountName);
+                var getCancelledJobResponse = clientToUse.Job.Get(commonData.SecondDataLakeAnalyticsAccountName, jobCreateResponse.JobId.GetValueOrDefault());
 
                 Assert.Equal(JobResult.Cancelled, getCancelledJobResponse.Result);
                 Assert.NotNull(getCancelledJobResponse.ErrorMessage);
                 Assert.NotEmpty(getCancelledJobResponse.ErrorMessage);
 
                 // Resubmit the job
-                jobCreateResponse = clientToUse.Job.Create(secondId, jobToSubmit, commonData.SecondDataLakeAnalyticsAccountName);
+                jobToSubmit.JobId = secondId;
+                jobCreateResponse = clientToUse.Job.Create(commonData.SecondDataLakeAnalyticsAccountName, secondId, jobToSubmit);
 
                 Assert.NotNull(jobCreateResponse);
 
                 // Poll the job until it finishes
-                var getJobResponse = clientToUse.Job.Get(jobCreateResponse.JobId.GetValueOrDefault(), commonData.SecondDataLakeAnalyticsAccountName);
+                var getJobResponse = clientToUse.Job.Get(commonData.SecondDataLakeAnalyticsAccountName, jobCreateResponse.JobId.GetValueOrDefault());
                 Assert.NotNull(getJobResponse);
 
                 int maxWaitInSeconds = 180; // 3 minutes should be long enough
@@ -88,7 +90,7 @@ namespace DataLakeAnalytics.Tests
                     // wait 5 seconds before polling again
                     TestUtilities.Wait(5000);
                     curWaitInSeconds += 5;
-                    getJobResponse = clientToUse.Job.Get(jobCreateResponse.JobId.GetValueOrDefault(), commonData.SecondDataLakeAnalyticsAccountName);
+                    getJobResponse = clientToUse.Job.Get(commonData.SecondDataLakeAnalyticsAccountName, jobCreateResponse.JobId.GetValueOrDefault());
                     Assert.NotNull(getJobResponse);
                 }
 
@@ -107,21 +109,27 @@ namespace DataLakeAnalytics.Tests
 
                 // Just compile the job, which requires a jobId in the job object.
                 jobToSubmit.JobId = getJobResponse.JobId;
-                var compileResponse = clientToUse.Job.Build(jobToSubmit, commonData.SecondDataLakeAnalyticsAccountName);
+                var compileResponse = clientToUse.Job.Build(commonData.SecondDataLakeAnalyticsAccountName, jobToSubmit);
                 Assert.NotNull(compileResponse);
+
+                // now compile a broken job and verify diagnostics report an error
+                jobToSubmit.Properties.Script = "DROP DATABASE IF EXIST FOO; CREATE DATABASE FOO;";
+                compileResponse = clientToUse.Job.Build(commonData.SecondDataLakeAnalyticsAccountName, jobToSubmit);
+                Assert.NotNull(compileResponse);
+
+                Assert.Equal(1, ((USqlJobProperties)compileResponse.Properties).Diagnostics.Count);
+                Assert.Equal(SeverityTypes.Error, ((USqlJobProperties)compileResponse.Properties).Diagnostics[0].Severity);
+                Assert.Equal(18, ((USqlJobProperties)compileResponse.Properties).Diagnostics[0].ColumnNumber);
+                Assert.Equal(22, ((USqlJobProperties)compileResponse.Properties).Diagnostics[0].End);
+                Assert.Equal(17, ((USqlJobProperties)compileResponse.Properties).Diagnostics[0].Start);
+                Assert.Equal(1, ((USqlJobProperties)compileResponse.Properties).Diagnostics[0].LineNumber);
+                Assert.Contains("E_CSC_USER_SYNTAXERROR", ((USqlJobProperties)compileResponse.Properties).Diagnostics[0].Message);
 
                 // list the jobs both with a hand crafted query string and using the parameters
                 listJobResponse = clientToUse.Job.List(commonData.SecondDataLakeAnalyticsAccountName, select:  "jobId" );
                 Assert.NotNull(listJobResponse);
 
                 Assert.True(listJobResponse.Any(job => job.JobId == getJobResponse.JobId));
-                
-                /* TODO: re-enable if we can figure out a way to include this
-                listJobResponse = clientToUse.Job.ListWithQueryString(commonData.SecondDataLakeAnalyticsAccountName, "$select=jobId");
-                Assert.NotNull(listJobResponse);
-                
-                Assert.True(listJobResponse.Value.Any(job => job.JobId == getJobResponse.JobId));
-                */
             }
         }
     }
