@@ -1,17 +1,5 @@
-﻿//
-// Copyright (c) Microsoft.  All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Azure.Management.ResourceManager;
 using Microsoft.Rest;
@@ -139,7 +127,7 @@ namespace ResourceGroups.Tests
             Assert.Equal("/subscriptions/38b598fc-e57a-423f-b2e7-dc0ddb631f1f", listSubscriptionsResult.FirstOrDefault().Id);
             Assert.Equal("38b598fc-e57a-423f-b2e7-dc0ddb631f1f", listSubscriptionsResult.FirstOrDefault().SubscriptionId);
             Assert.Equal("Visual Studio Ultimate with MSDN", listSubscriptionsResult.FirstOrDefault().DisplayName);
-            Assert.Equal("Disabled", listSubscriptionsResult.FirstOrDefault().State);
+            Assert.Equal("Disabled", listSubscriptionsResult.FirstOrDefault().State.ToString());
             Assert.NotNull(listSubscriptionsResult.FirstOrDefault().SubscriptionPolicies);
             Assert.Equal("Public_2014-09-01", listSubscriptionsResult.FirstOrDefault().SubscriptionPolicies.LocationPlacementId);
             Assert.Equal("MSDN_2014-09-01", listSubscriptionsResult.FirstOrDefault().SubscriptionPolicies.QuotaId);
@@ -181,7 +169,7 @@ namespace ResourceGroups.Tests
             Assert.Equal("/subscriptions/38b598fc-e57a-423f-b2e7-dc0ddb631f1f", getSubscriptionResult.Id);
             Assert.Equal("38b598fc-e57a-423f-b2e7-dc0ddb631f1f", getSubscriptionResult.SubscriptionId);
             Assert.Equal("Visual Studio Ultimate with MSDN", getSubscriptionResult.DisplayName);
-            Assert.Equal("Disabled", getSubscriptionResult.State);
+            Assert.Equal("Disabled", getSubscriptionResult.State.ToString());
             Assert.NotNull(getSubscriptionResult.SubscriptionPolicies);
             Assert.Equal("Public_2014-09-01", getSubscriptionResult.SubscriptionPolicies.LocationPlacementId);
             Assert.Equal("MSDN_2014-09-01", getSubscriptionResult.SubscriptionPolicies.QuotaId);
