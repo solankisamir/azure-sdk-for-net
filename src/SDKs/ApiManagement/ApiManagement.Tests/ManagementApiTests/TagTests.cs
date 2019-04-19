@@ -19,7 +19,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task CreateListUpdateDeleteApiTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -163,7 +163,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task CreateListUpdateDeleteProductTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -297,7 +297,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task CreateListUpdateDeleteOperationTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);

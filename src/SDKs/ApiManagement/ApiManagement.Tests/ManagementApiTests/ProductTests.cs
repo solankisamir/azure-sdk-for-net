@@ -18,7 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -175,7 +175,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public void ApisListAddRemove()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -256,7 +256,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public void GroupsListAddRemove()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -338,7 +338,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task SubscriptionsList()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
 
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
