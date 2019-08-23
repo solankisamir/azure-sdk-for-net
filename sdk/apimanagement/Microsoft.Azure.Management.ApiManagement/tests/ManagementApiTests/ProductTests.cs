@@ -10,6 +10,7 @@ using Xunit;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 
 namespace ApiManagement.Tests.ManagementApiTests
 {
@@ -110,6 +111,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                     Assert.Equal(productSubscriptionsLimit, getUpdatedResponse.SubscriptionsLimit);
                     Assert.Equal(patchedTerms, getUpdatedResponse.Terms);
 
+                    var listOfProducts = new List<string>();
                     // check product listing works
                     // list paged 
                     var productList = await testBase.client.Product.ListByServiceAsync(
@@ -119,6 +121,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                     Assert.NotNull(productList);
                     Assert.Single(productList);
+                    listOfProducts.Add(productList.First().DisplayName);
                     // first is the product in Test due to alphabetical order of name
                     Assert.Equal(patchedName, productList.First().DisplayName); 
                     Assert.NotEmpty(productList.NextPageLink);
@@ -127,16 +130,24 @@ namespace ApiManagement.Tests.ManagementApiTests
                     var pagedProducts = await testBase.client.Product.ListByServiceNextAsync(productList.NextPageLink);
                     Assert.NotNull(pagedProducts);
                     Assert.Single(pagedProducts);
-                    // next is the Starter product due to alphabetical order of name
-                    Assert.Equal("Starter", pagedProducts.First().DisplayName);
-
+                    listOfProducts.Add(pagedProducts.First().DisplayName);
+                    
                     // check the nextlink to the next page link query works
                     pagedProducts = await testBase.client.Product.ListByServiceNextAsync(pagedProducts.NextPageLink);
                     Assert.NotNull(pagedProducts);
                     Assert.Single(pagedProducts);
-                    // finally the Unlimited product due to alphabetical order of name
-                    Assert.Equal("Unlimited", pagedProducts.First().DisplayName);
+                    listOfProducts.Add(pagedProducts.First().DisplayName);
                     Assert.Null(pagedProducts.NextPageLink); // it should be empty now.
+
+                    // validate the list of products
+                    var allproducts = await testBase.client.Product.ListByServiceAsync(
+                        testBase.rgName,
+                        testBase.serviceName);
+                    Assert.Equal(3, allproducts.Count());
+                    foreach (var product in allproducts)
+                    {
+                        Assert.Contains(product.DisplayName, listOfProducts);
+                    }
 
                     // get the entity tag
                     productTag = await testBase.client.Product.GetEntityTagAsync(
