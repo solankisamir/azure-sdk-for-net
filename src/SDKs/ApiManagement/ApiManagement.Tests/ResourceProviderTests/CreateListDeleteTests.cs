@@ -19,7 +19,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
         [Fact]
         public void CreateListDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
 
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {

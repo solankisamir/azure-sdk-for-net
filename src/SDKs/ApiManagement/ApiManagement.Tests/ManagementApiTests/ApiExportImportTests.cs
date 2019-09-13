@@ -18,7 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task SwaggerTest()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -78,7 +78,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task WadlTest()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -140,7 +140,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task WsdlTest()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);

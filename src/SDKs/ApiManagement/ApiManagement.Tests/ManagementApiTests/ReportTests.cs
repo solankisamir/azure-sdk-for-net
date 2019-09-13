@@ -18,7 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task Query()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
                 var testBase = new ApiManagementTestBase(context);
