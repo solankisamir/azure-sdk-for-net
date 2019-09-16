@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
         [Fact]
         public void BackupAndRestoreService()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);

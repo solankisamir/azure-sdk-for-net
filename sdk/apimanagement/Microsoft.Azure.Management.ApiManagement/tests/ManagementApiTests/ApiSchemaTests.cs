@@ -104,7 +104,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task CreateListUpdateDeleteSwaggerSchema()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -246,7 +246,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task CreateListUpdateDeleteOpenApiSchema()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -388,7 +388,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task CreateListUpdateDeleteWsdlSchema()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);

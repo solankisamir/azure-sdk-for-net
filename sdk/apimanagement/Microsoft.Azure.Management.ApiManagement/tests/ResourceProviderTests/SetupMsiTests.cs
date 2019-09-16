@@ -18,11 +18,11 @@ namespace ApiManagement.Tests.ResourceProviderTests
         [Fact]
         public void SetupMsiTests()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
-                string consumptionSkuRegion = "West US";
+                string consumptionSkuRegion = "eastus";
 
                 // setup MSI on Consumption SKU
                 testBase.serviceProperties.Location = consumptionSkuRegion;

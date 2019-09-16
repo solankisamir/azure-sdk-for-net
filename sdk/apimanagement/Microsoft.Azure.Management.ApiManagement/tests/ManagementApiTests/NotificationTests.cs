@@ -17,7 +17,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task UpdateDeleteRecipientEmail()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
 
             using (MockContext context = MockContext.Start(this.GetType()))
             {
@@ -90,7 +90,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task UpdateDeleteRecipientUser()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
 
             using (MockContext context = MockContext.Start(this.GetType()))
             {

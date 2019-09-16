@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public async Task CreateUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
 
             using (MockContext context = MockContext.Start(this.GetType()))
             {
