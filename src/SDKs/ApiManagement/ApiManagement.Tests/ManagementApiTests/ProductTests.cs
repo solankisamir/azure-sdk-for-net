@@ -31,7 +31,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                 Assert.NotNull(listResponse);
                 Assert.Equal(2, listResponse.Count());// there are 2 product Starter and Unlimited created by default
-                Assert.NotNull(listResponse.NextPageLink);
+                Assert.Null(listResponse.NextPageLink);
 
                 string productId = TestUtilities.GenerateName("newproduct");
 

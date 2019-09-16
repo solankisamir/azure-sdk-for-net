@@ -325,7 +325,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                 Assert.NotNull(listResponse);
                 Assert.True(listResponse.Count() >= 2);
-                Assert.NotNull(listResponse.NextPageLink);
+                Assert.Null(listResponse.NextPageLink);
 
                 // list paged
                 listResponse = testBase.client.UserSubscription.List(
