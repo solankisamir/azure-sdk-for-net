@@ -17,6 +17,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class TagTest : TestBase
     {
         [Fact]
+        [Trait("Owner", "vifedo")]
         public async Task CreateListUpdateDeleteApiTags()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");

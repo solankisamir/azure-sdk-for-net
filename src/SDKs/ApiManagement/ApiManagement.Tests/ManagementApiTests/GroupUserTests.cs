@@ -17,6 +17,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class GroupUserTests : TestBase
     {
         [Fact]
+        [Trait("Owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");

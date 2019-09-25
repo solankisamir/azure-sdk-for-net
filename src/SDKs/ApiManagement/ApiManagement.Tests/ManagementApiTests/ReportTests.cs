@@ -16,6 +16,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class ReportTests : TestBase
     {
         [Fact]
+        [Trait("Owner", "vifedo")]
         public void Query()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");

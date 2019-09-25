@@ -15,6 +15,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class ApiExportImportTests : TestBase
     {
         [Fact]
+        [Trait("Owner", "vifedo")]
         public void SwaggerTest()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
@@ -76,6 +77,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("Owner", "vifedo")]
         public void WadlTest()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
@@ -139,6 +141,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("Owner", "vifedo")]
         public void WsdlTest()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
@@ -224,6 +227,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("Owner", "vifedo")]
         public void OpenApiTest()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");

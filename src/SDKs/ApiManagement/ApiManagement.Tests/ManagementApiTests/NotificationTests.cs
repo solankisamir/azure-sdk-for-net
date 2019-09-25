@@ -15,6 +15,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class NotificationTests : TestBase
     {
         [Fact]
+        [Trait("Owner", "vifedo")]
         public async Task UpdateDeleteRecipientEmail()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");

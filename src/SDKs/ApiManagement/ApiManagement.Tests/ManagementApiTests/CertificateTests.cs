@@ -16,6 +16,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class CertificateTests : TestBase
     {
         [Fact]
+        [Trait("Owner", "mkim")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
