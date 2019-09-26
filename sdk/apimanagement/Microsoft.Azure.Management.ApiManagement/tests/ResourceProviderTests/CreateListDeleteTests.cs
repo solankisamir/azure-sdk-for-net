@@ -17,6 +17,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
     public partial class ApiManagementServiceTests
     {
         [Fact]
+        [Trait("Owner", "kjoshi")
         public void CreateListDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

@@ -18,6 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class IssueTests : TestBase
     {
         [Fact]
+        [Trait("Owner", "vifedo")]
         public async Task CreateUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

@@ -21,6 +21,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
     public partial class ApiManagementServiceTests
     {
         [Fact]
+        [Trait("Owner", "sasolank")]
         public async Task CreateInVirtualNetworkTests()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

@@ -102,6 +102,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
 
         [Fact]
+        [Trait("Owner", "vifedo")]
         public async Task CreateListUpdateDeleteSwaggerSchema()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

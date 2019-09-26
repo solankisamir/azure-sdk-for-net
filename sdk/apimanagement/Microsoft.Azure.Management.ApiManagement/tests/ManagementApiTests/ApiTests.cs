@@ -19,6 +19,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class ApiTests : TestBase
     {
         [Fact]
+        [Trait("Owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -341,6 +342,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("Owner", "vifedo")]
         public async Task CloneApiUsingSourceApiId()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
