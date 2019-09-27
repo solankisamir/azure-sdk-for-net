@@ -18,7 +18,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
     public partial class ApiManagementServiceTests
     {
         [Fact]
-        [Trait("Owner", "sasolank")]
+        [Trait("owner", "sasolank")]
         public void CreateMultiRegionService()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -28,7 +28,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
 
                 var additionalLocation = new AdditionalLocation()
                 {
-                    Location = testBase.GetLocation("Europe"),
+                    Location = "South CentralUS",
                     Sku = new ApiManagementServiceSkuProperties(SkuType.Premium)
                 };
 

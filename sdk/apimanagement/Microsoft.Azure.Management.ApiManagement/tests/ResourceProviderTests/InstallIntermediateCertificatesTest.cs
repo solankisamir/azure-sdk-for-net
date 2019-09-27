@@ -19,7 +19,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
     public partial class ApiManagementServiceTests
     {
         [Fact]
-        [Trait("Owner", "sasolank")]
+        [Trait("owner", "sasolank")]
         public void InstallIntermediateCertificatesTest()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

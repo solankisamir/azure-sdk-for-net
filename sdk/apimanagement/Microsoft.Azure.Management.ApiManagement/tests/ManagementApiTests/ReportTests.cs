@@ -16,7 +16,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class ReportTests : TestBase
     {
         [Fact]
-        [Trait("Owner", "vifedo")]
+        [Trait("owner", "vifedo")]
         public void Query()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

@@ -14,7 +14,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class TenantAccessGitTests : TestBase
     {
         [Fact]
-        [Trait("Owner", "vifedo")]
+        [Trait("owner", "vifedo")]
         public async Task GetUpdateKeys()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

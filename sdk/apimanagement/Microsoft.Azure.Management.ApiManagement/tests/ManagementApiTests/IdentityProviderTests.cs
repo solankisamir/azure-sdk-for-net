@@ -18,7 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class IdentityProviderTests : TestBase
     {
         [Fact]
-        [Trait("Owner", "sasolank")]
+        [Trait("owner", "sasolank")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

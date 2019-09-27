@@ -18,7 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class ApiDiagnosticTests : TestBase
     {
         [Fact]
-        [Trait("Owner", "glfeokti")]
+        [Trait("owner", "glfeokti")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

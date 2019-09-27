@@ -15,7 +15,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class DelegationSettingTests : TestBase
     {
         [Fact]
-        [Trait("Owner", "vifedo")]
+        [Trait("owner", "vifedo")]
         public async Task CreateUpdateReset()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

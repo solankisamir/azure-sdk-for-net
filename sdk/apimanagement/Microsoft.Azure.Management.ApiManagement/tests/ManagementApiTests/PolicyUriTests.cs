@@ -22,7 +22,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         protected const string ProductValid = "https://raw.githubusercontent.com/Azure/api-management-samples/master/sdkClientResources/ProductPolicy.xml";
 
         [Fact]
-        [Trait("Owner", "vifedo")]
+        [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
