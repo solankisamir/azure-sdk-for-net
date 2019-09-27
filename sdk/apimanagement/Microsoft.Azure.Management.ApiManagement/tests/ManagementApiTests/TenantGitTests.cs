@@ -15,6 +15,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class TenantGitTests : TestBase
     {
         [Fact]
+        [Trait("Owner", "vifedo")]
         public async Task ValidateSaveDeploy()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
