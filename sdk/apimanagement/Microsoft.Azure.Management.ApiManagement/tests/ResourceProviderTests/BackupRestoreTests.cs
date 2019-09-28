@@ -26,6 +26,8 @@ namespace ApiManagement.Tests.ResourceProviderTests
             {
                 var testBase = new ApiManagementTestBase(context);
 
+                // storage in Dogfood only exists in westus/northcentralus
+                testBase.location = "westus";
                 var createdService = testBase.client.ApiManagementService.CreateOrUpdate(
                     resourceGroupName: testBase.rgName,
                     serviceName: testBase.serviceName,
