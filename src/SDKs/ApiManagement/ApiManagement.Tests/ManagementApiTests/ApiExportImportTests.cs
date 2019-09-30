@@ -16,6 +16,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class ApiExportImportTests : TestBase
     {
         [Fact]
+        [Trait("owner", "vifedo")]
         public async Task SwaggerTest()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

@@ -16,6 +16,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class ApiProductTests : TestBase
     {
         [Fact]
+        [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -74,7 +75,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                 Assert.NotNull(listByApiResponse);
                 Assert.Single(listByApiResponse);
                 Assert.Equal("Unlimited", listByApiResponse.First().DisplayName);
-                Assert.Empty(listByApiResponse.NextPageLink);
+                Assert.Null(listByApiResponse.NextPageLink);
             }
         }
     }

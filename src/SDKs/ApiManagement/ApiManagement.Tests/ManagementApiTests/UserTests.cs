@@ -17,6 +17,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class UserTests : TestBase
     {
         [Fact]
+        [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -143,6 +144,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("owner", "vifedo")]
         public void UserIdentities()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -180,6 +182,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("owner", "vifedo")]
         public void GroupsListAddRemove()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -305,6 +308,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("owner", "vifedo")]
         public void SubscriptionsList()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -343,7 +347,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                 Assert.NotNull(listResponse);
                 Assert.Single(listResponse);
-                Assert.NotNull(listResponse.NextPageLink);
+                Assert.Null(listResponse.NextPageLink);
             }
         }
     }

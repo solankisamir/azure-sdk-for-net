@@ -18,6 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class ApiTests : TestBase
     {
         [Fact]
+        [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -201,7 +202,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                     Assert.NotNull(listResponse);
                     Assert.Single(listResponse);
-                    Assert.Empty(listResponse.NextPageLink);
+                    Assert.Null(listResponse.NextPageLink);
 
                     // delete the api
                     testBase.client.Api.Delete(

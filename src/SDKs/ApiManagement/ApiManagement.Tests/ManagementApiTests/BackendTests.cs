@@ -19,6 +19,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class BackendTests : TestBase
     {
         [Fact]
+        [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -142,6 +143,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("owner", "mkim")]
         public async Task ServiceFabricCreateUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

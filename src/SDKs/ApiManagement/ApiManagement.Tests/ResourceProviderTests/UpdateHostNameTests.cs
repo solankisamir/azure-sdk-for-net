@@ -20,6 +20,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
     public partial class ApiManagementServiceTests
     {
         [Fact]
+        [Trait("owner", "sasolank")]
         public async Task UpdateHostNameTests()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");

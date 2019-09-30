@@ -51,6 +51,7 @@ namespace ApiManagement.Tests
             this.eventHubClient = context.GetServiceClient<EventHubManagementClient>();
 
             Initialize();
+            RegisterResourceProviders();
         }
 
         private void Initialize()
@@ -79,13 +80,14 @@ namespace ApiManagement.Tests
 
                 if (!testEnv.ConnectionString.KeyValuePairs.TryGetValue(ResourceGroupNameKey, out string resourceGroupName))
                 {
-                    rgName = TestUtilities.GenerateName("sdktestrg");
-                    resourcesClient.ResourceGroups.CreateOrUpdate(rgName, new ResourceGroup { Location = this.location });
+                    rgName = TestUtilities.GenerateName("sdktestrg");                    
                 }
                 else
                 {
                     this.rgName = resourceGroupName;
                 }
+
+                TryCreateResourceGroupIfNoExists(this.rgName);
 
                 if (testEnv.ConnectionString.KeyValuePairs.TryGetValue(TestCertificateKey, out string base64EncodedCertificate))
                 {
@@ -149,6 +151,32 @@ namespace ApiManagement.Tests
 
             var service = this.client.ApiManagementService.Get(this.rgName, this.serviceName);
             Assert.Equal(this.serviceName, service.Name);
+        }
+
+        private void RegisterResourceProviders()
+        {
+            // ApiManagement
+            this.resourcesClient.Providers.Register("Microsoft.ApiManagement");
+            // EventHub
+            this.resourcesClient.Providers.Register("Microsoft.EventHub");
+            // Storage
+            this.resourcesClient.Providers.Register("Microsoft.Storage");
+            // Network
+            this.resourcesClient.Providers.Register("Microsoft.Network");
+        }
+
+        private void TryCreateResourceGroupIfNoExists(string rgName)
+        {
+            var rg = resourcesClient.ResourceGroups.CheckExistence(rgName);
+            if (!rg)
+            {
+                resourcesClient.ResourceGroups.CreateOrUpdate(rgName, new ResourceGroup { Location = this.location });
+            }
+        }
+
+        public string GetOpenIdMetadataEndpointUrl()
+        {
+            return "https://" + TestUtilities.GenerateName("provider") + "." + TestUtilities.GenerateName("endpoint");
         }
 
         public string GetLocation(string regionIn = "US")

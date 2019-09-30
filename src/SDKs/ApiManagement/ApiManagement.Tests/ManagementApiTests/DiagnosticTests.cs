@@ -18,6 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class DiagnosticTests : TestBase
     {
         [Fact]
+        [Trait("owner", "glfeokti")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -35,8 +36,8 @@ namespace ApiManagement.Tests.ManagementApiTests
                 Assert.NotNull(diagnostics);
                 Assert.Empty(diagnostics);
 
-                // create new diagnostic
-                string diagnosticId = TestUtilities.GenerateName("diagnoticId");
+                // create new diagnostic, supported Ids are applicationinsights, azuremonitor
+                string diagnosticId = "applicationinsights";
                 string loggerId = TestUtilities.GenerateName("appInsights");
 
                 try
@@ -140,8 +141,8 @@ namespace ApiManagement.Tests.ManagementApiTests
                 }
                 finally
                 {
-                    testBase.client.Logger.Delete(testBase.rgName, testBase.serviceName, loggerId, "*");
                     testBase.client.Diagnostic.Delete(testBase.rgName, testBase.serviceName, diagnosticId, "*");
+                    testBase.client.Logger.Delete(testBase.rgName, testBase.serviceName, loggerId, "*");
                 }
             }
         }

@@ -30,6 +30,19 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                 try
                 {
+                    // clean up any existing property
+                    var propertListResponse = testBase.client.Property.ListByService(
+                        testBase.rgName,
+                        testBase.serviceName);
+                    foreach(var propertyData in propertListResponse)
+                    {
+                        testBase.client.Property.Delete(
+                            testBase.rgName,
+                            testBase.serviceName,
+                            propertyData.Name,
+                            "*");
+                    }
+
                     string propertyDisplayName = TestUtilities.GenerateName("propertydisplay");
                     string propertyValue = TestUtilities.GenerateName("propertyValue");
                     var createParameters = new PropertyContract(propertyDisplayName, propertyValue);

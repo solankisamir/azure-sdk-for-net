@@ -15,6 +15,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class NotificationTests : TestBase
     {
         [Fact]
+        [Trait("owner", "sasolank")]
         public async Task UpdateDeleteRecipientEmail()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
@@ -90,6 +91,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("owner", "sasolank")]
         public async Task UpdateDeleteRecipientUser()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
