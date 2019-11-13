@@ -34,8 +34,9 @@ namespace ApiManagement.Tests.ManagementApiTests
                 {
                     string backendName = TestUtilities.GenerateName("backendName");
                     string urlParameter = new UriBuilder("https", backendName, 443).Uri.ToString();
+                    string servicefabricUrl = "fabric:/mytestapp/mytestservice";
 
-                    var backendCreateParameters = new BackendContract(urlParameter, BackendProtocol.Http);
+                    var backendCreateParameters = new BackendContract(servicefabricUrl, BackendProtocol.Http);
                     backendCreateParameters.Description = TestUtilities.GenerateName("description");
                     backendCreateParameters.Tls = new BackendTlsProperties(
                         validateCertificateChain: true,
