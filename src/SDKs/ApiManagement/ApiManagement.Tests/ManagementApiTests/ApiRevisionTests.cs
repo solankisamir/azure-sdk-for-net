@@ -91,8 +91,8 @@ namespace ApiManagement.Tests.ManagementApiTests
                     // create a revision of Petstore
                     var petstoreRevisionContract = new ApiCreateOrUpdateParameter()
                     {
-                        Path = petstoreApiContract.Path + revisionNumber,
-                        DisplayName = petstoreApiContract.DisplayName + revisionNumber,
+                        Path = petstoreApiContract.Path,
+                        DisplayName = petstoreApiContract.DisplayName,
                         ServiceUrl = petstoreApiContract.ServiceUrl + revisionNumber,
                         Protocols = petstoreApiContract.Protocols,
                         SubscriptionKeyParameterNames = petstoreApiContract.SubscriptionKeyParameterNames,
@@ -151,7 +151,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                         firstOperationOfSecondRevision.NextPageLink);
                     Assert.NotNull(secondOperationOfSecondRevision);
                     Assert.Single(secondOperationOfSecondRevision);
-                    Assert.Empty(secondOperationOfSecondRevision.NextPageLink);
+                    Assert.Null(secondOperationOfSecondRevision.NextPageLink);
 
                     // list apiRevision
                     IPage<ApiRevisionContract> apiRevisions = await testBase.client.ApiRevisions.ListAsync(

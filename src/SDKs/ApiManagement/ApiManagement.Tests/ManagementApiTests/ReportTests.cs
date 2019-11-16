@@ -159,7 +159,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                     Console.WriteLine(ex);
                 }
 
-                Task.Delay(TimeSpan.FromSeconds(1)).GetAwaiter().GetResult();
+                Task.Delay(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
             }
         }
     }
