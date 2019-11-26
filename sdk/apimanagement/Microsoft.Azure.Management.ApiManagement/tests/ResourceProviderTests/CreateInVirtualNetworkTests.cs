@@ -15,6 +15,7 @@ using Xunit;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiManagementManagement.Tests.Helpers;
 
 namespace ApiManagement.Tests.ResourceProviderTests
 {
@@ -107,7 +108,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
                     testBase.serviceName);
                 Assert.NotNull(serviceNetworkStatus);
                 Assert.Single(serviceNetworkStatus);
-                Assert.Equal(testBase.location, serviceNetworkStatus.First().Location);
+                Assert.Equal(testBase.location.ToLowerAndRemoveWhiteSpaces(), serviceNetworkStatus.First().Location.ToLowerAndRemoveWhiteSpaces());
                 Assert.NotNull(serviceNetworkStatus.First().NetworkStatus.ConnectivityStatus);
                 Assert.NotNull(serviceNetworkStatus.First().NetworkStatus.DnsServers);
                 Assert.Equal("success", serviceNetworkStatus.First().NetworkStatus.ConnectivityStatus.First().Status, true);
