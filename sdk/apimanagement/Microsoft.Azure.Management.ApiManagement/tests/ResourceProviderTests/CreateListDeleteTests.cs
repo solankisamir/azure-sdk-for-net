@@ -56,7 +56,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
                     resourceGroupName: testBase.rgName);
 
                 Assert.NotNull(listServiceResponse);
-                Assert.True(listServiceResponse.Any());
+                Assert.True(listServiceResponse.Any(), $"Service in rg {testBase.rgName} does not exist");
 
                 var serviceResponse = listServiceResponse.FirstOrDefault();
 
