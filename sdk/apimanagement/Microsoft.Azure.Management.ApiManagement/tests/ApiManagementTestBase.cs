@@ -57,6 +57,8 @@ namespace ApiManagement.Tests
         {
             var testEnv = TestEnvironmentFactory.GetTestEnvironment();
 
+            tags = new Dictionary<string, string> { { "DateCreated", $"{DateTime.UtcNow.ToString()}" }, { "apiversion", $"{client.ApiVersion}" } };
+
             if (HttpMockServer.Mode == HttpRecorderMode.Record)
             {
                 if (!testEnv.ConnectionString.KeyValuePairs.TryGetValue(ServiceNameKey, out string apimServiceName))
@@ -123,9 +125,7 @@ namespace ApiManagement.Tests
                 {
                     this.testCertificatePassword = testCertificatePwd;
                 }
-            }
-
-            tags = new Dictionary<string, string> { { "tag1", "value1" }, { "tag2", "value2" }, { "tag3", "value3" } };
+            }           
 
             serviceProperties = new ApiManagementServiceResource
             {
@@ -157,7 +157,7 @@ namespace ApiManagement.Tests
             var rg = resourcesClient.ResourceGroups.CheckExistence(rgName);
             if (!rg)
             {
-                resourcesClient.ResourceGroups.CreateOrUpdate(rgName, new ResourceGroup { Location = this.location });
+                resourcesClient.ResourceGroups.CreateOrUpdate(rgName, new ResourceGroup { Location = this.location, Tags = tags });
             }
         }
 
