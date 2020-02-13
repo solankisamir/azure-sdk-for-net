@@ -61,9 +61,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                     // update the delegation settings
                     portalDelegationSettings.Subscriptions.Enabled = false;
-                    portalDelegationSettings.UserRegistration.Enabled = false;
-                    portalDelegationSettings.Url = null;
-                    portalDelegationSettings.ValidationKey = null;                    
+                    portalDelegationSettings.UserRegistration.Enabled = false;                
 
                     await testBase.client.DelegationSettings.UpdateAsync(
                         testBase.rgName,

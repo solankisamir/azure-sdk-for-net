@@ -36,7 +36,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
 
                 var storageAccountCreate = new StorageAccountCreateParameters()
                 {
-                    Location = testBase.location,
+                    Location = "westus",
                     Sku = new Sku { Name = SkuName.StandardGRS },
                     Kind = Kind.Storage
                 };
