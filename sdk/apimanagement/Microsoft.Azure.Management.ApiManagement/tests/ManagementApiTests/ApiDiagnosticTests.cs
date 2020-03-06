@@ -21,7 +21,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "glfeokti")]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -95,7 +95,6 @@ namespace ApiManagement.Tests.ManagementApiTests
                     Assert.NotNull(apiDiagnosticTag.ETag);
 
                     // now update the sampling and other settings of the diagnostic
-                    diagnosticContractParams.EnableHttpCorrelationHeaders = true;
                     diagnosticContractParams.AlwaysLog = "allErrors";
                     diagnosticContractParams.Sampling = new SamplingSettings("fixed", 50);
                     var listOfHeaders = new List<string> { "Content-type" };
@@ -135,7 +134,6 @@ namespace ApiManagement.Tests.ManagementApiTests
                         diagnosticContractParams,
                         apiDiagnosticTag.ETag);
                     Assert.NotNull(updatedApiDiagnostic);
-                    Assert.True(updatedApiDiagnostic.Body.EnableHttpCorrelationHeaders.Value);
                     Assert.Equal("allErrors", updatedApiDiagnostic.Body.AlwaysLog);
                     Assert.NotNull(updatedApiDiagnostic.Body.Sampling);
                     Assert.NotNull(updatedApiDiagnostic.Body.Frontend);

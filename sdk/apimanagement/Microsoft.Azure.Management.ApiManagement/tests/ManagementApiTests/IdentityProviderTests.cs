@@ -21,7 +21,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "sasolank")]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -33,7 +33,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                     string clientId = TestUtilities.GenerateName("clientId");
                     string clientSecret = TestUtilities.GenerateName("clientSecret");
 
-                    var identityProviderCreateParameters = new IdentityProviderContract(clientId, clientSecret);
+                    var identityProviderCreateParameters = new IdentityProviderCreateContract(clientId, clientSecret);
 
                     var identityProviderContract = testBase.client.IdentityProvider.CreateOrUpdate(
                         testBase.rgName,
@@ -83,7 +83,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                     Assert.NotNull(identityProviderContract);
                     Assert.Equal(IdentityProviderType.Facebook, identityProviderContract.IdentityProviderContractType);
-                    Assert.Equal(patchedSecret, identityProviderContract.ClientSecret);
+                    Assert.Null(identityProviderContract.ClientSecret);
                     Assert.Equal(clientId, identityProviderContract.ClientId);
 
                     // get the tag again
@@ -91,6 +91,12 @@ namespace ApiManagement.Tests.ManagementApiTests
                         testBase.rgName,
                         testBase.serviceName,
                         IdentityProviderType.Facebook);
+
+                    var secret = await testBase.client.IdentityProvider.ListSecretsAsync(
+                        testBase.rgName,
+                        testBase.serviceName,
+                        IdentityProviderType.Facebook);
+                    Assert.Equal(patchedSecret, secret.ClientSecret);
 
                     // delete the identity provider
                     testBase.client.IdentityProvider.Delete(

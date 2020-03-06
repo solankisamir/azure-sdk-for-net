@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDeleteApiTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -36,6 +36,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                     testBase.rgName,
                     testBase.serviceName,
                     null);
+
                 Assert.NotNull(listResponse);
                 Assert.Single(listResponse);
                 Assert.Null(listResponse.NextPageLink);
@@ -164,7 +165,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDeleteProductTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -298,7 +299,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDeleteOperationTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);

@@ -18,7 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -92,12 +92,12 @@ namespace ApiManagement.Tests.ManagementApiTests
                 {
                     testBase.client.Cache.Delete(testBase.rgName, testBase.serviceName, cacheid, "*");
                     // clean up all properties
-                    var listOfProperties = testBase.client.Property.ListByService(
+                    var listOfProperties = testBase.client.NamedValue.ListByService(
                         testBase.rgName,
                         testBase.serviceName);
                     foreach (var property in listOfProperties)
                     {
-                        testBase.client.Property.Delete(
+                        testBase.client.NamedValue.Delete(
                             testBase.rgName,
                             testBase.serviceName,
                             property.Name,

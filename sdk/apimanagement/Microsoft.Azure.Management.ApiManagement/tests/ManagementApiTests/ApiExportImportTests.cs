@@ -18,7 +18,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public void SwaggerTest()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -80,7 +80,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public void WadlTest()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -144,7 +144,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public void WsdlTest()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -230,7 +230,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public void OpenApiTest()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -291,7 +291,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Fact]
         public void OpenApiInJsonTest()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);

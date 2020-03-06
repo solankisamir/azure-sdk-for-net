@@ -19,7 +19,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -79,7 +79,6 @@ namespace ApiManagement.Tests.ManagementApiTests
                     Assert.NotNull(diagnosticTag.ETag);
 
                     // now update the sampling and other settings of the diagnostic
-                    diagnosticContractParams.EnableHttpCorrelationHeaders = true;
                     diagnosticContractParams.AlwaysLog = "allErrors";
                     diagnosticContractParams.Sampling = new SamplingSettings("fixed", 50);
                     var listOfHeaders = new List<string> { "Content-type" };
@@ -118,7 +117,6 @@ namespace ApiManagement.Tests.ManagementApiTests
                         diagnosticContractParams,
                         diagnosticTag.ETag);
                     Assert.NotNull(updatedDiagnostic);
-                    Assert.True(updatedDiagnostic.Body.EnableHttpCorrelationHeaders.Value);
                     Assert.Equal("allErrors", updatedDiagnostic.Body.AlwaysLog);
                     Assert.NotNull(updatedDiagnostic.Body.Sampling);
                     Assert.NotNull(updatedDiagnostic.Body.Frontend);
