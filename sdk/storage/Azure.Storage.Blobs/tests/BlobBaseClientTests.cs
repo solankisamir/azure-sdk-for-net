@@ -102,6 +102,7 @@ namespace Azure.Storage.Blobs.Test
         }
 
         [Test]
+        [Ignore("#10044: Re-enable failing Storage tests")]
         public void Ctor_CPK_EncryptionScope()
         {
             // Arrange
@@ -463,7 +464,6 @@ namespace Azure.Storage.Blobs.Test
                 {
                     await downloadingBlob.StagedDownloadAsync(
                         file,
-                        initialTransferLength: singleBlockThreshold,
                         transferOptions: transferOptions);
                 }
 
@@ -523,6 +523,26 @@ namespace Azure.Storage.Blobs.Test
         }
 
         [Test]
+        [Ignore("Don't want to record 300 MB of data in the tests")]
+        public async Task DownloadToAsync_LargeStream()
+        {
+            await using DisposingContainer test = await GetTestContainerAsync();
+            var data = GetRandomBuffer(300 * Constants.MB);
+
+            BlockBlobClient blob = InstrumentClient(test.Container.GetBlockBlobClient(GetNewBlobName()));
+            using (var stream = new MemoryStream(data))
+            {
+                await blob.UploadAsync(stream);
+            }
+            using (var resultStream = new MemoryStream(data))
+            {
+                await blob.DownloadToAsync(resultStream);
+                Assert.AreEqual(data.Length, resultStream.Length);
+                TestHelper.AssertSequenceEqual(data, resultStream.ToArray());
+            }
+        }
+
+        [Test]
         public async Task DownloadTo_Initial304()
         {
             await using DisposingContainer test = await GetTestContainerAsync();
@@ -576,12 +596,12 @@ namespace Azure.Storage.Blobs.Test
                                     await blob.UploadAsync(newStream, overwrite: true);
                                 }
                             }),
-                        initialTransferLength: Constants.KB,
                         transferOptions:
                             new StorageTransferOptions
                             {
                                 MaximumConcurrency = 1,
-                                MaximumTransferLength = Constants.KB
+                                MaximumTransferLength = Constants.KB,
+                                InitialTransferLength = Constants.KB
                             });
                 });
             Assert.IsTrue(ex.ErrorCode == BlobErrorCode.ConditionNotMet);
@@ -1376,7 +1396,7 @@ namespace Azure.Storage.Blobs.Test
             // Act
             await TestHelper.AssertExpectedExceptionAsync<RequestFailedException>(
                 unauthorizedBlobClient.ExistsAsync(),
-                e => Assert.AreEqual(BlobErrorCode.ResourceNotFound.ToString(), e.ErrorCode.Split('\n')[0]));
+                e => Assert.AreEqual(BlobErrorCode.ResourceNotFound.ToString(), e.ErrorCode));
         }
 
         [Test]

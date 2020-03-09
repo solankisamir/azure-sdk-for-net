@@ -21,15 +21,16 @@ namespace Azure.AI.TextAnalytics.Tests
             Matcher = new RecordMatcher(Sanitizer);
         }
 
-        public TextAnalyticsClient GetClient(TextAnalyticsApiKeyCredential credential = default)
+        public TextAnalyticsClient GetClient(TextAnalyticsApiKeyCredential credential = default, TextAnalyticsClientOptions options = default)
         {
             string apiKey = Recording.GetVariableFromEnvironment(ApiKeyEnvironmentVariable);
             credential ??= new TextAnalyticsApiKeyCredential(apiKey);
+            options ??= new TextAnalyticsClientOptions();
             return InstrumentClient (
                 new TextAnalyticsClient(
                     new Uri(Recording.GetVariableFromEnvironment(EndpointEnvironmentVariable)),
                     credential,
-                    Recording.InstrumentClientOptions(new TextAnalyticsClientOptions()))
+                    Recording.InstrumentClientOptions(options))
             );
         }
 
@@ -68,6 +69,31 @@ namespace Azure.AI.TextAnalytics.Tests
         }
 
         [Test]
+        public async Task DetectLanguageWithNoneCountryHintTest()
+        {
+            TextAnalyticsClient client = GetClient();
+            string input = "Este documento está en español";
+
+            DetectedLanguage language = await client.DetectLanguageAsync(input, DetectLanguageInput.None);
+            Assert.AreEqual("Spanish", language.Name);
+        }
+
+        [Test]
+        public async Task DetectLanguageWithNoneDefaultCountryHintTest()
+        {
+            var options = new TextAnalyticsClientOptions()
+            {
+                DefaultCountryHint = DetectLanguageInput.None
+            };
+
+            TextAnalyticsClient client = GetClient(options: options);
+            string input = "Este documento está en español";
+
+            DetectedLanguage language = await client.DetectLanguageAsync(input, DetectLanguageInput.None);
+            Assert.AreEqual("Spanish", language.Name);
+        }
+
+        [Test]
         public async Task DetectLanguageBatchConvenienceTest()
         {
             TextAnalyticsClient client = GetClient();
@@ -100,7 +126,7 @@ namespace Azure.AI.TextAnalytics.Tests
             Assert.AreEqual("English", results[0].PrimaryLanguage.Name);
             Assert.AreEqual("English", results[1].PrimaryLanguage.Name);
             Assert.IsNotNull(results[0].Statistics);
-            Assert.IsNotNull(results[0].Statistics.CharacterCount);
+            Assert.IsNotNull(results[0].Statistics.GraphemeCount);
             Assert.IsNotNull(results[0].Statistics.TransactionCount);
         }
 
@@ -167,7 +193,7 @@ namespace Azure.AI.TextAnalytics.Tests
             Assert.AreEqual("Spanish", results[2].PrimaryLanguage.Name);
             Assert.AreEqual("English", results[3].PrimaryLanguage.Name);
             Assert.IsNotNull(results[0].Statistics);
-            Assert.IsNotNull(results[0].Statistics.CharacterCount);
+            Assert.IsNotNull(results[0].Statistics.GraphemeCount);
             Assert.IsNotNull(results[0].Statistics.TransactionCount);
         }
 
@@ -202,19 +228,19 @@ namespace Azure.AI.TextAnalytics.Tests
             DocumentSentiment docSentiment = await client.AnalyzeSentimentAsync(input);
 
             Assert.AreEqual("Positive", docSentiment.Sentiment.ToString());
-            Assert.IsNotNull(docSentiment.SentimentScores.Positive);
-            Assert.IsNotNull(docSentiment.SentimentScores.Neutral);
-            Assert.IsNotNull(docSentiment.SentimentScores.Negative);
+            Assert.IsNotNull(docSentiment.ConfidenceScores.Positive);
+            Assert.IsNotNull(docSentiment.ConfidenceScores.Neutral);
+            Assert.IsNotNull(docSentiment.ConfidenceScores.Negative);
 
             foreach (var sentence in docSentiment.Sentences)
             {
                 Assert.AreEqual("Positive", sentence.Sentiment.ToString());
-                Assert.IsNotNull(sentence.SentimentScores.Positive);
-                Assert.IsNotNull(sentence.SentimentScores.Neutral);
-                Assert.IsNotNull(sentence.SentimentScores.Negative);
-                Assert.IsNotNull(sentence.Offset);
-                Assert.IsNotNull(sentence.Length);
-                Assert.AreEqual(input.Length, sentence.Length);
+                Assert.IsNotNull(sentence.ConfidenceScores.Positive);
+                Assert.IsNotNull(sentence.ConfidenceScores.Neutral);
+                Assert.IsNotNull(sentence.ConfidenceScores.Negative);
+                Assert.IsNotNull(sentence.GraphemeOffset);
+                Assert.IsNotNull(sentence.GraphemeLength);
+                Assert.Greater(sentence.GraphemeLength, 0);
             }
         }
 
@@ -247,17 +273,17 @@ namespace Azure.AI.TextAnalytics.Tests
             foreach (AnalyzeSentimentResult docs in results)
             {
                 DocumentSentiment docSentiment = docs.DocumentSentiment;
-                Assert.IsNotNull(docSentiment.SentimentScores.Positive);
-                Assert.IsNotNull(docSentiment.SentimentScores.Neutral);
-                Assert.IsNotNull(docSentiment.SentimentScores.Negative);
+                Assert.IsNotNull(docSentiment.ConfidenceScores.Positive);
+                Assert.IsNotNull(docSentiment.ConfidenceScores.Neutral);
+                Assert.IsNotNull(docSentiment.ConfidenceScores.Negative);
 
                 foreach (var sentence in docSentiment.Sentences)
                 {
-                    Assert.IsNotNull(sentence.SentimentScores.Positive);
-                    Assert.IsNotNull(sentence.SentimentScores.Neutral);
-                    Assert.IsNotNull(sentence.SentimentScores.Negative);
-                    Assert.IsNotNull(sentence.Offset);
-                    Assert.IsNotNull(sentence.Length);
+                    Assert.IsNotNull(sentence.ConfidenceScores.Positive);
+                    Assert.IsNotNull(sentence.ConfidenceScores.Neutral);
+                    Assert.IsNotNull(sentence.ConfidenceScores.Negative);
+                    Assert.IsNotNull(sentence.GraphemeOffset);
+                    Assert.IsNotNull(sentence.GraphemeLength);
                 }
             }
         }
@@ -307,17 +333,17 @@ namespace Azure.AI.TextAnalytics.Tests
             foreach (AnalyzeSentimentResult docs in results)
             {
                 DocumentSentiment docSentiment = docs.DocumentSentiment;
-                Assert.IsNotNull(docSentiment.SentimentScores.Positive);
-                Assert.IsNotNull(docSentiment.SentimentScores.Neutral);
-                Assert.IsNotNull(docSentiment.SentimentScores.Negative);
+                Assert.IsNotNull(docSentiment.ConfidenceScores.Positive);
+                Assert.IsNotNull(docSentiment.ConfidenceScores.Neutral);
+                Assert.IsNotNull(docSentiment.ConfidenceScores.Negative);
 
                 foreach (var sentence in docSentiment.Sentences)
                 {
-                    Assert.IsNotNull(sentence.SentimentScores.Positive);
-                    Assert.IsNotNull(sentence.SentimentScores.Neutral);
-                    Assert.IsNotNull(sentence.SentimentScores.Negative);
-                    Assert.IsNotNull(sentence.Offset);
-                    Assert.IsNotNull(sentence.Length);
+                    Assert.IsNotNull(sentence.ConfidenceScores.Positive);
+                    Assert.IsNotNull(sentence.ConfidenceScores.Neutral);
+                    Assert.IsNotNull(sentence.ConfidenceScores.Negative);
+                    Assert.IsNotNull(sentence.GraphemeOffset);
+                    Assert.IsNotNull(sentence.GraphemeLength);
                 }
             }
         }
@@ -528,10 +554,10 @@ namespace Azure.AI.TextAnalytics.Tests
             foreach (CategorizedEntity entity in entities)
             {
                 Assert.IsTrue(entitiesList.Contains(entity.Text));
-                Assert.IsNotNull(entity.Score);
-                Assert.IsNotNull(entity.Offset);
-                Assert.IsNotNull(entity.Length);
-                Assert.Greater(entity.Length, 0);
+                Assert.IsNotNull(entity.ConfidenceScore);
+                Assert.IsNotNull(entity.GraphemeOffset);
+                Assert.IsNotNull(entity.GraphemeLength);
+                Assert.Greater(entity.GraphemeLength, 0);
             }
         }
 
@@ -561,7 +587,7 @@ namespace Azure.AI.TextAnalytics.Tests
             foreach (CategorizedEntity entity in entities)
             {
                 if (entity.Text == "last week")
-                    Assert.IsTrue(entity.SubCategory != EntitySubCategory.None);
+                    Assert.AreEqual("DateRange", entity.SubCategory);
             }
         }
 
@@ -696,10 +722,10 @@ namespace Azure.AI.TextAnalytics.Tests
             foreach (PiiEntity entity in entities)
             {
                 Assert.IsTrue(entitiesList.Contains(entity.Text));
-                Assert.IsNotNull(entity.Score);
-                Assert.IsNotNull(entity.Offset);
-                Assert.IsNotNull(entity.Length);
-                Assert.Greater(entity.Length, 0);
+                Assert.IsNotNull(entity.ConfidenceScore);
+                Assert.IsNotNull(entity.GraphemeOffset);
+                Assert.IsNotNull(entity.GraphemeLength);
+                Assert.Greater(entity.GraphemeLength, 0);
             }
         }
 
@@ -847,13 +873,13 @@ namespace Azure.AI.TextAnalytics.Tests
             {
                 Assert.IsTrue(entitiesList.Contains(entity.Name));
                 Assert.IsNotNull(entity.DataSource);
-                Assert.IsNotNull(entity.Id);
+                Assert.IsNotNull(entity.DataSourceEntityId);
                 Assert.IsNotNull(entity.Language);
                 Assert.IsNotNull(entity.Url);
                 Assert.IsNotNull(entity.Matches);
-                Assert.IsNotNull(entity.Matches.First().Length);
-                Assert.IsNotNull(entity.Matches.First().Offset);
-                Assert.IsNotNull(entity.Matches.First().Score);
+                Assert.IsNotNull(entity.Matches.First().GraphemeLength);
+                Assert.IsNotNull(entity.Matches.First().GraphemeOffset);
+                Assert.IsNotNull(entity.Matches.First().ConfidenceScore);
                 Assert.IsNotNull(entity.Matches.First().Text);
             }
         }
@@ -987,60 +1013,58 @@ namespace Azure.AI.TextAnalytics.Tests
         }
 
         [Test]
-        public async Task RecognizeEntitiesCategoriesSubCategories()
+        public async Task RecognizeEntitiesCategories()
         {
             TextAnalyticsClient client = GetClient();
-            const string input = "Bill Gates | Microsoft | New Mexico | 800-102-1100 | help@microsoft.com | April 4, 1975 12:34 | April 4, 1975 | 12:34 | five seconds | 9 | third | 120% | €30 | 11m | 22 °C";
+            const string input = "Bill Gates | Microsoft | New Mexico | 800-102-1100 | help@microsoft.com | April 4, 1975 12:34 | April 4, 1975 | 12:34 | five seconds | 9 | third | 120% | €30 | 11m | 22 °C |" +
+                "Software Engineer | Wedding | Microsoft Surface laptop | Coding | 127.0.0.1 | https://github.com/azure/azure-sdk-for-net";
 
-            Response<IReadOnlyCollection<CategorizedEntity>> response = await client.RecognizeEntitiesAsync(input);
+            Response <IReadOnlyCollection<CategorizedEntity>> response = await client.RecognizeEntitiesAsync(input);
             List<CategorizedEntity> entities = response.Value.ToList();
 
-            Assert.AreEqual(15, entities.Count);
+            Assert.AreEqual(21, entities.Count);
 
             Assert.AreEqual(EntityCategory.Person, entities[0].Category);
-            Assert.AreEqual(EntitySubCategory.None, entities[0].SubCategory);
 
             Assert.AreEqual(EntityCategory.Organization, entities[1].Category);
-            Assert.AreEqual(EntitySubCategory.None, entities[1].SubCategory);
 
             Assert.AreEqual(EntityCategory.Location, entities[2].Category);
-            Assert.AreEqual(EntitySubCategory.GPE, entities[2].SubCategory);
 
             Assert.AreEqual(EntityCategory.PhoneNumber, entities[3].Category);
-            Assert.AreEqual(EntitySubCategory.None, entities[3].SubCategory);
 
             Assert.AreEqual(EntityCategory.Email, entities[4].Category);
-            Assert.AreEqual(EntitySubCategory.None, entities[4].SubCategory);
 
             Assert.AreEqual(EntityCategory.DateTime, entities[5].Category);
-            Assert.AreEqual(EntitySubCategory.None, entities[5].SubCategory);
 
             Assert.AreEqual(EntityCategory.DateTime, entities[6].Category);
-            Assert.AreEqual(EntitySubCategory.Date, entities[6].SubCategory);
 
             Assert.AreEqual(EntityCategory.DateTime, entities[7].Category);
-            Assert.AreEqual(EntitySubCategory.Time, entities[7].SubCategory);
 
             Assert.AreEqual(EntityCategory.DateTime, entities[8].Category);
-            Assert.AreEqual(EntitySubCategory.Duration, entities[8].SubCategory);
 
             Assert.AreEqual(EntityCategory.Quantity, entities[9].Category);
-            Assert.AreEqual(EntitySubCategory.Number, entities[9].SubCategory);
 
             Assert.AreEqual(EntityCategory.Quantity, entities[10].Category);
-            Assert.AreEqual(EntitySubCategory.Ordinal, entities[10].SubCategory);
 
             Assert.AreEqual(EntityCategory.Quantity, entities[11].Category);
-            Assert.AreEqual(EntitySubCategory.Percentage, entities[11].SubCategory);
 
             Assert.AreEqual(EntityCategory.Quantity, entities[12].Category);
-            Assert.AreEqual(EntitySubCategory.Currency, entities[12].SubCategory);
 
             Assert.AreEqual(EntityCategory.Quantity, entities[13].Category);
-            Assert.AreEqual(EntitySubCategory.Dimension, entities[13].SubCategory);
 
             Assert.AreEqual(EntityCategory.Quantity, entities[14].Category);
-            Assert.AreEqual(EntitySubCategory.Temperature, entities[14].SubCategory);
+
+            Assert.AreEqual(EntityCategory.PersonType, entities[15].Category);
+
+            Assert.AreEqual(EntityCategory.Event, entities[16].Category);
+
+            Assert.AreEqual(EntityCategory.Product, entities[17].Category);
+
+            Assert.AreEqual(EntityCategory.Skill, entities[18].Category);
+
+            Assert.AreEqual(EntityCategory.IPAddress, entities[19].Category);
+
+            Assert.AreEqual(EntityCategory.Url, entities[20].Category);
         }
 
         [Test]

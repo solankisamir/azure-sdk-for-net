@@ -38,7 +38,7 @@ namespace Azure.AI.TextAnalytics.Samples
                 },
                 new DetectLanguageInput("4", ":) :( :D")
                 {
-                     CountryHint = "us",
+                     CountryHint = DetectLanguageInput.None,
                 }
             };
 
@@ -62,10 +62,10 @@ namespace Azure.AI.TextAnalytics.Samples
                 }
                 else
                 {
-                    Debug.WriteLine($"    Detected language {result.PrimaryLanguage.Name} with confidence {result.PrimaryLanguage.Score:0.00}.");
+                    Debug.WriteLine($"    Detected language {result.PrimaryLanguage.Name} with confidence {result.PrimaryLanguage.Score}.");
 
                     Debug.WriteLine($"    Document statistics:");
-                    Debug.WriteLine($"        Character count: {result.Statistics.CharacterCount}");
+                    Debug.WriteLine($"        Character count (in Unicode graphemes): {result.Statistics.GraphemeCount}");
                     Debug.WriteLine($"        Transaction count: {result.Statistics.TransactionCount}");
                     Debug.WriteLine("");
                 }

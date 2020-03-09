@@ -6,21 +6,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure.Messaging.EventHubs.Processor;
+using Azure.Messaging.EventHubs.Consumer;
+using Azure.Messaging.EventHubs.Primitives;
 
 namespace Azure.Messaging.EventHubs.Tests
 {
     /// <summary>
-    ///   The EventProcessor relies on a <see cref="PartitionManager" /> to store checkpoints and handle partition
-    ///   ownership.  <see cref="MockCheckPointStorage"/> is simple partition manager that stores checkpoints and
+    ///   The EventProcessor relies on a <see cref="StorageManager" /> to store checkpoints and handle partition
+    ///   ownership.  <see cref="MockCheckPointStorage"/> is simple storage manager that stores checkpoints and
     ///   partition ownership in memory of your program.
     ///
     ///   You can use the <see cref="MockCheckPointStorage"/> to get started with using the `EventProcessor`.
-    ///   But in production, you should choose an implementation of the <see cref="PartitionManager" /> interface that will
+    ///   But in production, you should choose an implementation of the <see cref="StorageManager" /> interface that will
     ///   store the checkpoints and partition ownership to a persistent store instead.
     /// </summary>
     ///
-    internal sealed class MockCheckPointStorage : PartitionManager
+    internal class MockCheckPointStorage : StorageManager
     {
         /// <summary>The primitive for synchronizing access during ownership update.</summary>
         private readonly object _ownershipLock = new object();
@@ -28,33 +29,33 @@ namespace Azure.Messaging.EventHubs.Tests
         /// <summary>The primitive for synchronizing access during checkpoint update.</summary>
         private readonly object _checkpointLock = new object();
 
-        /// <summary>Logs activities performed by this partition manager.</summary>
+        /// <summary>Logs activities performed by this storage manager.</summary>
         private readonly Action<string> _logger;
 
         /// <summary>
         ///   The set of checkpoints held for this instance.
         /// </summary>
         ///
-        public Dictionary<(string, string, string, string), Checkpoint> Checkpoints { get; }
+        public Dictionary<(string, string, string, string), CheckpointData> Checkpoints { get; }
 
         /// <summary>
         ///   The set of stored ownership.
         /// </summary>
         ///
-        public Dictionary<(string, string, string, string), PartitionOwnership> Ownership { get; }
+        public Dictionary<(string, string, string, string), EventProcessorPartitionOwnership> Ownership { get; }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="MockCheckPointStorage"/> class.
         /// </summary>
         ///
-        /// <param name="logger">Logs activities performed by this partition manager.</param>
+        /// <param name="logger">Logs activities performed by this storage manager.</param>
         ///
         public MockCheckPointStorage(Action<string> logger = null)
         {
             _logger = logger;
 
-            Ownership = new Dictionary<(string, string, string, string), PartitionOwnership>();
-            Checkpoints = new Dictionary<(string, string, string, string), Checkpoint>();
+            Ownership = new Dictionary<(string, string, string, string), EventProcessorPartitionOwnership>();
+            Checkpoints = new Dictionary<(string, string, string, string), CheckpointData>();
         }
 
         /// <summary>
@@ -68,12 +69,12 @@ namespace Azure.Messaging.EventHubs.Tests
         ///
         /// <returns>An enumerable containing all the existing ownership for the associated Event Hub and consumer group.</returns>
         ///
-        public override Task<IEnumerable<PartitionOwnership>> ListOwnershipAsync(string fullyQualifiedNamespace,
-                                                                                 string eventHubName,
-                                                                                 string consumerGroup,
-                                                                                 CancellationToken cancellationToken = default)
+        public override Task<IEnumerable<EventProcessorPartitionOwnership>> ListOwnershipAsync(string fullyQualifiedNamespace,
+                                                                                               string eventHubName,
+                                                                                               string consumerGroup,
+                                                                                               CancellationToken cancellationToken = default)
         {
-            List<PartitionOwnership> ownershipList;
+            List<EventProcessorPartitionOwnership> ownershipList;
 
             lock (_ownershipLock)
             {
@@ -84,7 +85,7 @@ namespace Azure.Messaging.EventHubs.Tests
                     .ToList();
             }
 
-            return Task.FromResult((IEnumerable<PartitionOwnership>)ownershipList);
+            return Task.FromResult((IEnumerable<EventProcessorPartitionOwnership>)ownershipList);
         }
 
         /// <summary>
@@ -96,31 +97,31 @@ namespace Azure.Messaging.EventHubs.Tests
         ///
         /// <returns>An enumerable containing the successfully claimed ownership.</returns>
         ///
-        public override Task<IEnumerable<PartitionOwnership>> ClaimOwnershipAsync(IEnumerable<PartitionOwnership> partitionOwnership,
-                                                                                  CancellationToken cancellationToken = default)
+        public override Task<IEnumerable<EventProcessorPartitionOwnership>> ClaimOwnershipAsync(IEnumerable<EventProcessorPartitionOwnership> partitionOwnership,
+                                                                                                CancellationToken cancellationToken = default)
         {
-            var claimedOwnership = new List<PartitionOwnership>();
+            var claimedOwnership = new List<EventProcessorPartitionOwnership>();
 
             // The following lock makes sure two different event processors won't try to claim ownership of a partition
             // simultaneously.  This approach prevents an ownership from being stolen just after being claimed.
 
             lock (_ownershipLock)
             {
-                foreach (PartitionOwnership ownership in partitionOwnership)
+                foreach (EventProcessorPartitionOwnership ownership in partitionOwnership)
                 {
                     var isClaimable = true;
                     var key = (ownership.FullyQualifiedNamespace, ownership.EventHubName, ownership.ConsumerGroup, ownership.PartitionId);
 
-                    // In case the partition already has an owner, the ETags must match in order to claim it.
+                    // In case the partition already has an owner, the versions must match in order to claim it.
 
-                    if (Ownership.TryGetValue(key, out PartitionOwnership currentOwnership))
+                    if (Ownership.TryGetValue(key, out EventProcessorPartitionOwnership currentOwnership))
                     {
-                        isClaimable = string.Equals(ownership.ETag, currentOwnership.ETag, StringComparison.InvariantCultureIgnoreCase);
+                        isClaimable = string.Equals(ownership.Version, currentOwnership.Version, StringComparison.InvariantCultureIgnoreCase);
                     }
 
                     if (isClaimable)
                     {
-                        ownership.ETag = Guid.NewGuid().ToString();
+                        ownership.Version = Guid.NewGuid().ToString();
 
                         Ownership[key] = ownership;
                         claimedOwnership.Add(ownership);
@@ -134,7 +135,7 @@ namespace Azure.Messaging.EventHubs.Tests
                 }
             }
 
-            return Task.FromResult((IEnumerable<PartitionOwnership>)claimedOwnership);
+            return Task.FromResult((IEnumerable<EventProcessorPartitionOwnership>)claimedOwnership);
         }
 
         /// <summary>
@@ -148,23 +149,34 @@ namespace Azure.Messaging.EventHubs.Tests
         ///
         /// <returns>An enumerable containing all the existing ownership for the associated Event Hub and consumer group.</returns>
         ///
-        public override Task<IEnumerable<Checkpoint>> ListCheckpointsAsync(string fullyQualifiedNamespace,
-                                                                           string eventHubName,
-                                                                           string consumerGroup,
-                                                                           CancellationToken cancellationToken = default)
+        public override Task<IEnumerable<EventProcessorCheckpoint>> ListCheckpointsAsync(string fullyQualifiedNamespace,
+                                                                                         string eventHubName,
+                                                                                         string consumerGroup,
+                                                                                         CancellationToken cancellationToken = default)
         {
-            List<Checkpoint> checkpointList;
+            List<EventProcessorCheckpoint> checkpointList;
+
+            EventProcessorCheckpoint TransformCheckpointData(CheckpointData data) =>
+                new EventProcessorCheckpoint
+                {
+                    FullyQualifiedNamespace = data.Checkpoint.FullyQualifiedNamespace,
+                    EventHubName = data.Checkpoint.EventHubName,
+                    ConsumerGroup = data.Checkpoint.ConsumerGroup,
+                    PartitionId = data.Checkpoint.PartitionId,
+                    StartingPosition = EventPosition.FromOffset(data.Event.Offset, false)
+                };
 
             lock (_checkpointLock)
             {
                 checkpointList = Checkpoints.Values
-                    .Where(checkpoint => checkpoint.FullyQualifiedNamespace == fullyQualifiedNamespace
-                        && checkpoint.EventHubName == eventHubName
-                        && checkpoint.ConsumerGroup == consumerGroup)
+                    .Where(data => data.Checkpoint.FullyQualifiedNamespace == fullyQualifiedNamespace
+                        && data.Checkpoint.EventHubName == eventHubName
+                        && data.Checkpoint.ConsumerGroup == consumerGroup)
+                    .Select(data => TransformCheckpointData(data))
                     .ToList();
             }
 
-            return Task.FromResult((IEnumerable<Checkpoint>)checkpointList);
+            return Task.FromResult((IEnumerable<EventProcessorCheckpoint>)checkpointList);
         }
 
         /// <summary>
@@ -172,15 +184,17 @@ namespace Azure.Messaging.EventHubs.Tests
         /// </summary>
         ///
         /// <param name="checkpoint">The checkpoint containing the information to be stored.</param>
+        /// <param name="eventData">The event to use as the basis for the checkpoint's starting position.</param>
         /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> instance to signal the request to cancel the operation.  Not supported.</param>
         ///
-        public override Task UpdateCheckpointAsync(Checkpoint checkpoint,
+        public override Task UpdateCheckpointAsync(EventProcessorCheckpoint checkpoint,
+                                                   EventData eventData,
                                                    CancellationToken cancellationToken = default)
         {
             lock (_checkpointLock)
             {
                 var key = (checkpoint.FullyQualifiedNamespace, checkpoint.EventHubName, checkpoint.ConsumerGroup, checkpoint.PartitionId);
-                Checkpoints[key] = checkpoint;
+                Checkpoints[key] = new CheckpointData(checkpoint, eventData);
 
                 Log($"Checkpoint with partition id = '{checkpoint.PartitionId}' updated successfully.");
             }
@@ -195,5 +209,23 @@ namespace Azure.Messaging.EventHubs.Tests
         /// <param name="message">The log message to send.</param>
         ///
         private void Log(string message) => _logger?.Invoke(message);
+
+        /// <summary>
+        ///   Serves as a lightweight wrapper for the components that comprise the data
+        ///   observed for a checkpoint.
+        /// </summary>
+        ///
+        public struct CheckpointData
+        {
+            public EventProcessorCheckpoint Checkpoint { get; }
+            public EventData Event { get; }
+
+            public CheckpointData(EventProcessorCheckpoint checkpoint,
+                                  EventData eventData)
+            {
+                Checkpoint = checkpoint;
+                Event = eventData;
+            }
+        }
     }
 }
