@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -35,8 +35,8 @@ namespace ApiManagement.Tests.ManagementApiTests
                     string openIdProviderName = TestUtilities.GenerateName("openIdName");
                     string metadataEndpoint = testBase.GetOpenIdMetadataEndpointUrl();
                     string clientId = TestUtilities.GenerateName("clientId");
-                    var openIdConnectCreateParameters = new OpenidConnectProviderCreateContract(openIdProviderName,
-                        metadataEndpoint, clientId, "vfedonkintodo");
+                    var openIdConnectCreateParameters = new OpenidConnectProviderContract(openIdProviderName,
+                        metadataEndpoint, clientId);
 
                     var createResponse = testBase.client.OpenIdConnectProvider.CreateOrUpdate(
                         testBase.rgName,
@@ -68,8 +68,8 @@ namespace ApiManagement.Tests.ManagementApiTests
                     string metadataEndpoint2 = testBase.GetOpenIdMetadataEndpointUrl();
                     string clientId2 = TestUtilities.GenerateName("clientId");
                     string clientSecret = TestUtilities.GenerateName("clientSecret");
-                    var openIdConnectCreateParameters2 = new OpenidConnectProviderCreateContract(openIdProviderName2,
-                        metadataEndpoint2, clientId2, "vfedonkintodo");
+                    var openIdConnectCreateParameters2 = new OpenidConnectProviderContract(openIdProviderName2,
+                        metadataEndpoint2, clientId2);
                     openIdConnectCreateParameters2.ClientSecret = clientSecret;
                     openIdConnectCreateParameters2.Description = TestUtilities.GenerateName("description");
 

@@ -10,7 +10,6 @@
 
 namespace Microsoft.Azure.Management.ApiManagement.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -56,36 +55,5 @@ namespace Microsoft.Azure.Management.ApiManagement.Models
         [JsonProperty(PropertyName = "secondaryKey")]
         public string SecondaryKey { get; set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public virtual void Validate()
-        {
-            if (PrimaryKey != null)
-            {
-                if (PrimaryKey.Length > 256)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "PrimaryKey", 256);
-                }
-                if (PrimaryKey.Length < 1)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "PrimaryKey", 1);
-                }
-            }
-            if (SecondaryKey != null)
-            {
-                if (SecondaryKey.Length > 256)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "SecondaryKey", 256);
-                }
-                if (SecondaryKey.Length < 1)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "SecondaryKey", 1);
-                }
-            }
-        }
     }
 }

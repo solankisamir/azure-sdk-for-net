@@ -184,7 +184,7 @@ namespace Microsoft.Azure.Management.ApiManagement
             /// ETag of the Entity. Not required when creating an entity, but required when
             /// updating an entity.
             /// </param>
-            public static OpenidConnectProviderContract CreateOrUpdate(this IOpenIdConnectProviderOperations operations, string resourceGroupName, string serviceName, string opid, OpenidConnectProviderCreateContract parameters, string ifMatch = default(string))
+            public static OpenidConnectProviderContract CreateOrUpdate(this IOpenIdConnectProviderOperations operations, string resourceGroupName, string serviceName, string opid, OpenidConnectProviderContract parameters, string ifMatch = default(string))
             {
                 return operations.CreateOrUpdateAsync(resourceGroupName, serviceName, opid, parameters, ifMatch).GetAwaiter().GetResult();
             }
@@ -214,7 +214,7 @@ namespace Microsoft.Azure.Management.ApiManagement
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<OpenidConnectProviderContract> CreateOrUpdateAsync(this IOpenIdConnectProviderOperations operations, string resourceGroupName, string serviceName, string opid, OpenidConnectProviderCreateContract parameters, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<OpenidConnectProviderContract> CreateOrUpdateAsync(this IOpenIdConnectProviderOperations operations, string resourceGroupName, string serviceName, string opid, OpenidConnectProviderContract parameters, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateOrUpdateWithHttpMessagesAsync(resourceGroupName, serviceName, opid, parameters, ifMatch, null, cancellationToken).ConfigureAwait(false))
                 {

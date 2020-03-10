@@ -43,7 +43,7 @@ namespace Microsoft.Azure.Management.ApiManagement.Models
         /// <param name="principalId">The principal id of the identity.</param>
         /// <param name="tenantId">The client tenant id of the
         /// identity.</param>
-        public ApiManagementServiceIdentity(string type, System.Guid? principalId = default(System.Guid?), System.Guid? tenantId = default(System.Guid?), IDictionary<string, ApiManagementServiceIdentityUserAssignedIdentitiesValue> userAssignedIdentities = default(IDictionary<string, ApiManagementServiceIdentityUserAssignedIdentitiesValue>))
+        public ApiManagementServiceIdentity(string type, System.Guid? principalId = default(System.Guid?), System.Guid? tenantId = default(System.Guid?), IDictionary<string, Components16nk615schemasapimanagementserviceidentitypropertiesuserassignedidentitiesadditionalproperties> userAssignedIdentities = default(IDictionary<string, Components16nk615schemasapimanagementserviceidentitypropertiesuserassignedidentitiesadditionalproperties>))
         {
             Type = type;
             PrincipalId = principalId;
@@ -83,7 +83,7 @@ namespace Microsoft.Azure.Management.ApiManagement.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "userAssignedIdentities")]
-        public IDictionary<string, ApiManagementServiceIdentityUserAssignedIdentitiesValue> UserAssignedIdentities { get; set; }
+        public IDictionary<string, Components16nk615schemasapimanagementserviceidentitypropertiesuserassignedidentitiesadditionalproperties> UserAssignedIdentities { get; set; }
 
         /// <summary>
         /// Validate the object.

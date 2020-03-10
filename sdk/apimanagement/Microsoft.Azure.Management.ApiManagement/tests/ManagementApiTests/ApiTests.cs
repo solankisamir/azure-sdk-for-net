@@ -22,7 +22,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -196,8 +196,8 @@ namespace ApiManagement.Tests.ManagementApiTests
                     string openIdProviderName = TestUtilities.GenerateName("openIdName");
                     string metadataEndpoint = testBase.GetOpenIdMetadataEndpointUrl();
                     string clientId = TestUtilities.GenerateName("clientId");
-                    var openIdConnectCreateParameters = new OpenidConnectProviderCreateContract(openIdProviderName,
-                        metadataEndpoint, clientId, "vfedonkintodo");
+                    var openIdConnectCreateParameters = new OpenidConnectProviderContract(openIdProviderName,
+                        metadataEndpoint, clientId);
 
                     var openIdCreateResponse = testBase.client.OpenIdConnectProvider.CreateOrUpdate(
                         testBase.rgName,
@@ -345,7 +345,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CloneApiUsingSourceApiId()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -382,7 +382,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                             apiCreateOrUpdate);
 
                     Assert.NotNull(swaggerApiResponse);
-                    Assert.Null(swaggerApiResponse.SubscriptionRequired);
+                    Assert.True(swaggerApiResponse.SubscriptionRequired);
                     Assert.Equal(path, swaggerApiResponse.Path);
 
                     var swagerApiOperations = await testBase.client.ApiOperation.ListByApiAsync(

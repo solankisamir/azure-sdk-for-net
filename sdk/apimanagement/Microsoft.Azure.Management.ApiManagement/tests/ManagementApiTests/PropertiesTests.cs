@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -80,6 +80,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                     // list the properties
                     var listResponse = testBase.client.NamedValue.ListByService(testBase.rgName, testBase.serviceName, null);
                     Assert.NotNull(listResponse);
+
                     Assert.Equal(2, listResponse.Count());
 
                     // delete a property

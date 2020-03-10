@@ -413,13 +413,6 @@ namespace Microsoft.Azure.Management.ApiManagement.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (NotificationSenderEmail != null)
-            {
-                if (NotificationSenderEmail.Length > 100)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "NotificationSenderEmail", 100);
-                }
-            }
             if (HostnameConfigurations != null)
             {
                 foreach (var element in HostnameConfigurations)
@@ -429,10 +422,6 @@ namespace Microsoft.Azure.Management.ApiManagement.Models
                         element.Validate();
                     }
                 }
-            }
-            if (VirtualNetworkConfiguration != null)
-            {
-                VirtualNetworkConfiguration.Validate();
             }
             if (AdditionalLocations != null)
             {
@@ -452,20 +441,6 @@ namespace Microsoft.Azure.Management.ApiManagement.Models
                     {
                         element2.Validate();
                     }
-                }
-            }
-            if (PublisherEmail != null)
-            {
-                if (PublisherEmail.Length > 100)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "PublisherEmail", 100);
-                }
-            }
-            if (PublisherName != null)
-            {
-                if (PublisherName.Length > 100)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "PublisherName", 100);
                 }
             }
             if (Sku != null)

@@ -19,7 +19,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
         [Trait("owner", "sasolank")]
         public void SetupMsiTests()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);

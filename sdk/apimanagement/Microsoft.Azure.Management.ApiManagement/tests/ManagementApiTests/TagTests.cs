@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDeleteApiTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -29,6 +29,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                 var tagsResources = await testBase.client.Tag.ListByServiceAsync(
                     testBase.rgName,
                     testBase.serviceName);
+
                 Assert.Empty(tagsResources);
 
                 // list all the APIs
@@ -165,7 +166,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDeleteProductTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -299,7 +300,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDeleteOperationTags()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");//vfedonkintodo
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
