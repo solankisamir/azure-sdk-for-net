@@ -60,6 +60,8 @@ namespace ApiManagement.Tests
         {
             var testEnv = TestEnvironmentFactory.GetTestEnvironment();
 
+            tags = new Dictionary<string, string> { { "DateCreated", $"{DateTime.UtcNow.ToString()}" }, { "apiversion", $"{client.ApiVersion}" } };
+
             if (HttpMockServer.Mode == HttpRecorderMode.Record)
             {
                 if (!testEnv.ConnectionString.KeyValuePairs.TryGetValue(ServiceNameKey, out string apimServiceName))
@@ -82,13 +84,14 @@ namespace ApiManagement.Tests
 
                 if (!testEnv.ConnectionString.KeyValuePairs.TryGetValue(ResourceGroupNameKey, out string resourceGroupName))
                 {
-                    rgName = TestUtilities.GenerateName("sdktestrg");
-                    resourcesClient.ResourceGroups.CreateOrUpdate(rgName, new ResourceGroup { Location = this.location });
+                    rgName = TestUtilities.GenerateName("sdktestrg");                    
                 }
                 else
                 {
                     this.rgName = resourceGroupName;
                 }
+
+                TryCreateResourceGroupIfNoExists(this.rgName);
 
                 if (testEnv.ConnectionString.KeyValuePairs.TryGetValue(TestCertificateKey, out string base64EncodedCertificate))
                 {
@@ -154,6 +157,14 @@ namespace ApiManagement.Tests
             Assert.Equal(this.serviceName, service.Name);
         }
 
+        private void TryCreateResourceGroupIfNoExists(string rgName)
+        {
+            var rg = resourcesClient.ResourceGroups.CheckExistence(rgName);
+            if (!rg)
+            {
+                resourcesClient.ResourceGroups.CreateOrUpdate(rgName, new ResourceGroup { Location = this.location, Tags = tags });
+            }
+        }
 
         public string GetOpenIdMetadataEndpointUrl()
         {

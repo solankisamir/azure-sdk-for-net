@@ -21,7 +21,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public void Query()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -160,7 +160,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                     Console.WriteLine(ex);
                 }
 
-                Task.Delay(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
+                Task.Delay(TimeSpan.FromSeconds(15)).GetAwaiter().GetResult();
             }
         }
     }
