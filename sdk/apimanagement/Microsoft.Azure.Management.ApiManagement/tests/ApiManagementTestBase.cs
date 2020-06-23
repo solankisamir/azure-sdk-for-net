@@ -160,7 +160,7 @@ namespace ApiManagement.Tests
         private void TryCreateResourceGroupIfNoExists(string rgName)
         {
             var rg = resourcesClient.ResourceGroups.CheckExistence(rgName);
-            if (!rg)
+            if (rg.HasValue && !rg.Value)
             {
                 resourcesClient.ResourceGroups.CreateOrUpdate(rgName, new ResourceGroup { Location = this.location, Tags = tags });
             }
