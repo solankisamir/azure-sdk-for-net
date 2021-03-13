@@ -179,7 +179,8 @@ namespace ApiManagement.Tests.ManagementApiTests
                         testBase.rgName,
                         testBase.serviceName,
                         gatewayId,
-                        hostnameConfigId);
+                        hostnameConfigId,
+                        "*");
 
                     //get latest etag for delete
                     getResponse = await testBase.client.Gateway.GetWithHttpMessagesAsync(
@@ -207,7 +208,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                 {
                     try
                     {
-                        testBase.client.GatewayHostnameConfiguration.Delete(testBase.rgName, testBase.serviceName, gatewayId, hostnameConfigId);
+                        testBase.client.GatewayHostnameConfiguration.Delete(testBase.rgName, testBase.serviceName, gatewayId, hostnameConfigId, "*");
                     }
                     catch (ErrorResponseException) { }
                     testBase.client.Gateway.Delete(testBase.rgName, testBase.serviceName, gatewayId, "*");
