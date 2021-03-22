@@ -75,7 +75,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                     credentials.Add("name", eventHubName);
                     credentials.Add("connectionString", eventHubKeys.PrimaryConnectionString);
 
-                    var loggerCreateParameters = new LoggerContract(LoggerType.AzureEventHub, credentials);
+                    var loggerCreateParameters = new LoggerContract(LoggerType.AzureEventHub, credentials: credentials);
                     // create new group with default parameters
                     string loggerDescription = TestUtilities.GenerateName("newloggerDescription");
                     loggerCreateParameters.Description = loggerDescription;
@@ -200,7 +200,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                     var credentials = new Dictionary<string, string>();
                     credentials.Add("instrumentationKey", applicationInsightsGuid.ToString());
 
-                    var loggerCreateParameters = new LoggerContract(LoggerType.ApplicationInsights, credentials);
+                    var loggerCreateParameters = new LoggerContract(LoggerType.ApplicationInsights, credentials: credentials);
                     // create new group with default parameters
                     string loggerDescription = TestUtilities.GenerateName("newloggerDescription");
                     loggerCreateParameters.Description = loggerDescription;
