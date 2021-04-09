@@ -47,7 +47,8 @@ namespace ApiManagement.Tests
         public string testSecretIdentifier { get; internal set; }
 
         public ApiManagementTestBase(MockContext context)
-        {           
+        {
+            this.client = context.GetServiceClient<ApiManagementClient>();
             this.resourcesClient = context.GetServiceClient<ResourceManagementClient>();
             this.storageClient = context.GetServiceClient<StorageManagementClient>();
             this.networkClient = context.GetServiceClient<NetworkManagementClient>();
