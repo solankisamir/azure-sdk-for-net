@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         [Trait("owner", "vifedo")]
         public async Task CreateListUpdateDelete()
         {
-            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+                       Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -28,6 +28,7 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                 string propertyId = TestUtilities.GenerateName("newproperty");
                 string secretPropertyId = TestUtilities.GenerateName("secretproperty");
+                string kvPropertyId = TestUtilities.GenerateName("kvproperty");
 
                 try
                 {
@@ -77,11 +78,31 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                     Assert.Equal(secretPropertyValue, secretValueResponse.Value);
 
+                    //create key vault namedvalue
+                    string kvPropertyDisplayName = TestUtilities.GenerateName("kvPropertydisplay");
+                    string kvPropertyValue = TestUtilities.GenerateName("kvPropertyValue");
+                    var kvCreateParameters = new NamedValueCreateContract(secretPropertyDisplayName, secretPropertyValue)
+                    {
+                        KeyVault = new KeyVaultContractCreateProperties
+                        {
+                            IdentityClientId = Guid.NewGuid().ToString(),
+                            SecretIdentifier = testBase.testSecretIdentifier
+                        },
+                        Secret = true
+                    };
+                    var kvPropertyResponse = testBase.client.NamedValue.CreateOrUpdate(
+                        testBase.rgName,
+                        testBase.serviceName,
+                        kvPropertyId,
+                        kvCreateParameters);
+                    ValidateProperty(kvPropertyResponse, testBase, kvPropertyId, kvPropertyDisplayName, kvPropertyValue, true);
+
+
                     // list the properties
                     var listResponse = testBase.client.NamedValue.ListByService(testBase.rgName, testBase.serviceName, null);
                     Assert.NotNull(listResponse);
 
-                    Assert.Equal(3, listResponse.Count());
+                    Assert.Equal(2, listResponse.Count());
 
                     // delete a property
                     testBase.client.NamedValue.Delete(
@@ -171,6 +192,38 @@ namespace ApiManagement.Tests.ManagementApiTests
                 Assert.NotNull(contract.Tags);
                 Assert.Equal(tags.Count, contract.Tags.Count);
             }
+        }
+
+        public static class KeyVault
+        {
+            static readonly string secretIdentifier = "https://contoso.vault.azure.net/secrets/testcert";
+            static readonly string value = "value";
+            static string identityClientId = "";
+
+            static KeyVault()
+            {
+
+            }
+
+            public static void AddMSIAccess(string clientId)
+            {
+                identityClientId = clientId;
+            }
+
+            public static void RemoveMSIAccess()
+            {
+                identityClientId = string.Empty;
+            }
+
+            public static string GetValue(string clientId, string identifier)
+            {
+                if (!String.Equals(identityClientId, clientId, StringComparison.OrdinalIgnoreCase))
+                    throw new Exception(".");
+                if (!String.Equals(secretIdentifier, identifier, StringComparison.OrdinalIgnoreCase))
+                    throw new Exception(".");
+                return value;
+            }
+
         }
     }
 }

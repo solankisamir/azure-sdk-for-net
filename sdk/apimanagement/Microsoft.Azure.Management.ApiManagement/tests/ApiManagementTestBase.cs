@@ -28,6 +28,7 @@ namespace ApiManagement.Tests
         private const string LocationKey = "Location";
         private const string TestCertificateKey = "TestCertificate";
         private const string TestCertificatePasswordKey = "TestCertificatePassword";
+        private const string TestSecretIdentifier = "https://contoso.vault.azure.net/secrets/testcert";
 
         public string location { get; set; }
         public string subscriptionId { get; set; }
@@ -43,10 +44,10 @@ namespace ApiManagement.Tests
         public ApiManagementServiceResource serviceProperties { get; internal set; }
         public string base64EncodedTestCertificateData { get; internal set; }
         public string testCertificatePassword { get; internal set; }
+        public string testSecretIdentifier { get; internal set; }
 
         public ApiManagementTestBase(MockContext context)
-        {
-            this.client = context.GetServiceClient<ApiManagementClient>();
+        {           
             this.resourcesClient = context.GetServiceClient<ResourceManagementClient>();
             this.storageClient = context.GetServiceClient<StorageManagementClient>();
             this.networkClient = context.GetServiceClient<NetworkManagementClient>();
@@ -100,6 +101,12 @@ namespace ApiManagement.Tests
                 {
                     this.testCertificatePassword = testCertificatePassword;
                     HttpMockServer.Variables[TestCertificatePasswordKey] = testCertificatePassword;
+                }
+
+                if (testEnv.ConnectionString.KeyValuePairs.TryGetValue(TestSecretIdentifier, out string testKeyVaultSecret))
+                {
+                    this.testSecretIdentifier = testKeyVaultSecret;
+                    HttpMockServer.Variables[TestSecretIdentifier] = testKeyVaultSecret;
                 }
 
                 this.subscriptionId = testEnv.SubscriptionId;

@@ -41,7 +41,8 @@ namespace ApiManagement.Tests.ManagementApiTests
                     var cacheContract = new CacheContract()
                     {
                         ConnectionString = TestUtilities.GenerateName(),
-                        Description = TestUtilities.GenerateName()
+                        Description = TestUtilities.GenerateName(),
+                        UseFromLocation = TestUtilities.GenerateName()
                     };
 
                     var createResponse = await testBase.client.Cache.CreateOrUpdateAsync(
