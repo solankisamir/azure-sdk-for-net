@@ -27,6 +27,9 @@ namespace ApiManagement.Tests.ResourceProviderTests
             {
                 var testBase = new ApiManagementTestBase(context);
 
+                var domainOwnershipIdentifierResult = testBase.client.ApiManagementService.GetDomainOwnershipIdentifier();
+                Assert.NotNull(domainOwnershipIdentifierResult);
+
                 testBase.serviceProperties.Sku.Name = SkuType.Premium;
                 var hostnameConfig1 = new HostnameConfiguration()
                 {
