@@ -51,7 +51,7 @@ namespace Microsoft.Azure.Management.ApiManagement.Models
         /// should be encrypted or not. Default value is false.</param>
         /// <param name="keyVault">KeyVault location details of the
         /// namedValue.</param>
-        public NamedValueCreateContract(string displayName, string value, string id = default(string), string name = default(string), string type = default(string), IList<string> tags = default(IList<string>), bool? secret = default(bool?), KeyVaultContractCreateProperties keyVault = default(KeyVaultContractCreateProperties))
+        public NamedValueCreateContract(string displayName, string value = default(string), string id = default(string), string name = default(string), string type = default(string), IList<string> tags = default(IList<string>), bool? secret = default(bool?), KeyVaultContractCreateProperties keyVault = default(KeyVaultContractCreateProperties))
             : base(id, name, type)
         {
             Tags = tags;

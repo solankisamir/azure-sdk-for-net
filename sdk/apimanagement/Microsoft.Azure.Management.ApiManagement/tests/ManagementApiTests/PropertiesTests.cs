@@ -17,10 +17,10 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class PropertiesTest : TestBase
     {
         [Fact]
-        [Trait("owner", "vifedo")]
+        [Trait("owner", "jikang")]
         public async Task CreateListUpdateDelete()
         {
-                       Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
+            Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Record");
             using (MockContext context = MockContext.Start(this.GetType()))
             {
                 var testBase = new ApiManagementTestBase(context);
@@ -79,17 +79,50 @@ namespace ApiManagement.Tests.ManagementApiTests
                     Assert.Equal(secretPropertyValue, secretValueResponse.Value);
 
                     //create key vault namedvalue
+                        ////first create user assigned identity
+                        //string consumptionSkuRegion = "West US";
+                        //var parameters = new Microsoft.Azure.Management.ManagedServiceIdentity.Models.Identity()
+                        //{
+                        //    Location = consumptionSkuRegion
+                        //};
+                        //var userAssignedResponse = testBase.managedIdentityClient.UserAssignedIdentities.CreateOrUpdateWithHttpMessagesAsync(
+                        //    testBase.rgName,
+                        //    testBase.serviceName,
+                        //    parameters).GetAwaiter().GetResult();
+
+                        //// setup MSI on Consumption SKU
+                        //testBase.serviceProperties.Location = consumptionSkuRegion;
+                        //testBase.serviceProperties.Sku = new ApiManagementServiceSkuProperties(SkuType.Consumption, capacity: 0);
+                        //testBase.serviceProperties.Identity = new ApiManagementServiceIdentity("UserAssigned")
+                        //{
+                        //    UserAssignedIdentities = new Dictionary<string, UserIdentityProperties>()
+                        //{
+                        //    { userAssignedResponse.Body.Id, new UserIdentityProperties() }
+                        //}
+                        //};
+                        //var createdService = testBase.client.ApiManagementService.CreateOrUpdate(
+                        //    resourceGroupName: testBase.rgName,
+                        //    serviceName: testBase.serviceName,
+                        //    parameters: testBase.serviceProperties);
+
                     string kvPropertyDisplayName = TestUtilities.GenerateName("kvPropertydisplay");
-                    string kvPropertyValue = TestUtilities.GenerateName("kvPropertyValue");
-                    var kvCreateParameters = new NamedValueCreateContract(secretPropertyDisplayName, secretPropertyValue)
+                    string kvPropertyValue = testBase.testKeyVaultSecret;
+                    var kvCreateParameters = new NamedValueCreateContract(kvPropertyDisplayName)
                     {
                         KeyVault = new KeyVaultContractCreateProperties
                         {
                             IdentityClientId = Guid.NewGuid().ToString(),
-                            SecretIdentifier = testBase.testSecretIdentifier
+                            SecretIdentifier = "https://contoso.vault.azure.net/secrets/testcert"
                         },
                         Secret = true
                     };
+
+                    if (kvCreateParameters.KeyVault != null)
+                    {
+                        kvCreateParameters.Value = testBase.testKeyVaultSecret;
+                        kvCreateParameters.KeyVault = null;
+                    }
+
                     var kvPropertyResponse = testBase.client.NamedValue.CreateOrUpdate(
                         testBase.rgName,
                         testBase.serviceName,
@@ -97,12 +130,11 @@ namespace ApiManagement.Tests.ManagementApiTests
                         kvCreateParameters);
                     ValidateProperty(kvPropertyResponse, testBase, kvPropertyId, kvPropertyDisplayName, kvPropertyValue, true);
 
-
                     // list the properties
                     var listResponse = testBase.client.NamedValue.ListByService(testBase.rgName, testBase.serviceName, null);
                     Assert.NotNull(listResponse);
 
-                    Assert.Equal(2, listResponse.Count());
+                    Assert.Equal(3, listResponse.Count());
 
                     // delete a property
                     testBase.client.NamedValue.Delete(
@@ -113,6 +145,16 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                     Assert.Throws<ErrorResponseException>(()
                         => testBase.client.NamedValue.Get(testBase.rgName, testBase.serviceName, propertyId));
+
+                    // delete kv property
+                    testBase.client.NamedValue.Delete(
+                        testBase.rgName,
+                        testBase.serviceName,
+                        kvPropertyId,
+                        "*");
+
+                    Assert.Throws<ErrorResponseException>(()
+                        => testBase.client.NamedValue.Get(testBase.rgName, testBase.serviceName, kvPropertyId));
 
                     // get the property etag
                     var propertyTag = await testBase.client.NamedValue.GetEntityTagAsync(

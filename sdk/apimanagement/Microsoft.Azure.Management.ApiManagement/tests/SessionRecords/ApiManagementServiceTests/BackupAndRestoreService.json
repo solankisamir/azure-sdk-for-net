@@ -3943,6 +3943,7 @@
           "-1"
         ]
       },
+      //[SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Test passwords only valid for the duration of the test")]
       "ResponseBody": "{\r\n  \"keys\": [\r\n    {\r\n      \"keyName\": \"key1\",\r\n      \"value\": \"z6i3Waqr5AeYPCHv8/D+Nsx7yxtLzDrl5hQ9hgOxEO4RSxsZLlm5aH+84U1bFwJXHywQykPYjLcxARPBFAyDZQ==\",\r\n      \"permissions\": \"FULL\"\r\n    },\r\n    {\r\n      \"keyName\": \"key2\",\r\n      \"value\": \"CeR+DJIH2je+YgMWTLOef7W2uOt9GP61oltZxjV6qj74LLVyGE6O+rMOwhn956BKWlGJXSy9Z5JJHO+c3XzkYw==\",\r\n      \"permissions\": \"FULL\"\r\n    }\r\n  ]\r\n}",
       "StatusCode": 200
     },
