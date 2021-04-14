@@ -14,7 +14,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class TenantAccessGitTests : TestBase
     {
         [Fact]
-        [Trait("owner", "vifedo")]
+        [Trait("owner", "sasolank")]
         public async Task GetUpdateKeys()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
@@ -52,7 +52,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                 testBase.client.TenantAccessGit.RegeneratePrimaryKey(
                     testBase.rgName,
                     testBase.serviceName,
-                    "gitAccess");
+                    "access");
 
                 var secretsResponse2 = await testBase.client.TenantAccess.ListSecretsAsync(
                     testBase.rgName,
@@ -66,7 +66,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                 testBase.client.TenantAccessGit.RegenerateSecondaryKey(
                     testBase.rgName,
                     testBase.serviceName,
-                    "gitAccess");
+                    "access");
 
                 var getSecretsHttpResponse = await testBase.client.TenantAccess.ListSecretsWithHttpMessagesAsync(
                     testBase.rgName,
