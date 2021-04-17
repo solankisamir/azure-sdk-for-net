@@ -28,7 +28,7 @@ namespace ApiManagement.Tests
         private const string LocationKey = "Location";
         private const string TestCertificateKey = "TestCertificate";
         private const string TestCertificatePasswordKey = "TestCertificatePassword";
-        private const string TestKeyVaultSecretKey = "testKeyVaultSecret";
+        private const string TestKeyVaultSecretKey = "testKeyVaultSecretUrl";
 
         public string location { get; set; }
         public string subscriptionId { get; set; }
@@ -44,7 +44,7 @@ namespace ApiManagement.Tests
         public ApiManagementServiceResource serviceProperties { get; internal set; }
         public string base64EncodedTestCertificateData { get; internal set; }
         public string testCertificatePassword { get; internal set; }
-        public string testKeyVaultSecret { get; internal set; }
+        public string testKeyVaultSecretUrl { get; internal set; }
 
         public ApiManagementTestBase(MockContext context)
         {
@@ -104,10 +104,10 @@ namespace ApiManagement.Tests
                     HttpMockServer.Variables[TestCertificatePasswordKey] = testCertificatePassword;
                 }
 
-                if (testEnv.ConnectionString.KeyValuePairs.TryGetValue(TestKeyVaultSecretKey, out string testKeyVaultSecret))
+                if (testEnv.ConnectionString.KeyValuePairs.TryGetValue(TestKeyVaultSecretKey, out string testKeyVaultSecretUrl))
                 {
-                    this.testKeyVaultSecret = testKeyVaultSecret;
-                    HttpMockServer.Variables[TestKeyVaultSecretKey] = testKeyVaultSecret;
+                    this.testKeyVaultSecretUrl = testKeyVaultSecretUrl;
+                    HttpMockServer.Variables[TestKeyVaultSecretKey] = testKeyVaultSecretUrl;
                 }
 
                 this.subscriptionId = testEnv.SubscriptionId;
@@ -133,10 +133,10 @@ namespace ApiManagement.Tests
                 {
                     this.testCertificatePassword = testCertificatePwd;
                 }
-                HttpMockServer.Variables.TryGetValue(TestKeyVaultSecretKey, out var testKVSecret);
-                if (!string.IsNullOrEmpty(testKVSecret))
+                HttpMockServer.Variables.TryGetValue(TestKeyVaultSecretKey, out var testKVSecretUrl);
+                if (!string.IsNullOrEmpty(testKVSecretUrl))
                 {
-                    this.testKeyVaultSecret = testKVSecret;
+                    this.testKeyVaultSecretUrl = testKVSecretUrl;
                 }
             }
 
@@ -152,8 +152,9 @@ namespace ApiManagement.Tests
                 Location = location,
                 PublisherEmail = "apim@autorestsdk.com",
                 PublisherName = "autorestsdk",
-                Tags = tags
-            };
+                Tags = tags,
+                Identity = new ApiManagementServiceIdentity("SystemAssigned")
+        };
         }
 
         public void TryCreateApiManagementService()
