@@ -97,6 +97,14 @@ namespace ApiManagement.Tests.ManagementApiTests
                     Assert.NotNull(getKVResponse);
                     Assert.Equal(kvcertificateId, getKVResponse.Body.Name);
 
+                    //refresh secret of key vault client
+                    var refreshKvCertificateResponse = testBase.client.Certificate.RefreshSecret(
+                        testBase.rgName,
+                        testBase.serviceName,
+                        kvcertificateId);
+
+                    Assert.NotNull(refreshKvCertificateResponse);
+
                     // list certificates
                     listResponse = testBase.client.Certificate.ListByService(
                         testBase.rgName,
@@ -117,7 +125,7 @@ namespace ApiManagement.Tests.ManagementApiTests
                         testBase.rgName,
                         testBase.serviceName,
                         kvcertificateId,
-                        getKVResponse.Headers.ETag);
+                        "*");
 
                     // list again to see it was removed
                     listResponse = testBase.client.Certificate.ListByService(

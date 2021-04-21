@@ -97,6 +97,15 @@ namespace ApiManagement.Tests.ManagementApiTests
 
                     ValidateProperty(kvPropertyResponse, testBase, kvPropertyId, kvPropertyDisplayName, string.Empty, true);
 
+                    //refresh secret of key vault namedvalue
+                    var refreshKvPropertyResponse = testBase.client.NamedValue.RefreshSecret(
+                        testBase.rgName,
+                        testBase.serviceName,
+                        kvPropertyId);
+
+                    Assert.NotNull(refreshKvPropertyResponse);
+                    Assert.Equal("Success", refreshKvPropertyResponse.KeyVault.LastStatus.Code);
+
                     // list the properties
                     var listResponse = testBase.client.NamedValue.ListByService(testBase.rgName, testBase.serviceName, null);
                     Assert.NotNull(listResponse);
@@ -156,6 +165,33 @@ namespace ApiManagement.Tests.ManagementApiTests
                         secretPropertyDisplayName,
                         secretPropertyValue,
                         false);
+
+                    // patch the secret property to kv property
+                    var updatekvProperty = new NamedValueUpdateParameters()
+                    {
+                        KeyVault = new KeyVaultContractCreateProperties
+                        {
+                            SecretIdentifier = testBase.testKeyVaultSecretUrl
+                        },
+                        Secret = true
+                    };
+
+                    testBase.client.NamedValue.Update(
+                        testBase.rgName,
+                        testBase.serviceName,
+                        secretPropertyId,
+                        updatekvProperty,
+                        "*");
+
+                    // check it is patched
+                    var patchkvResponse = await testBase.client.NamedValue.GetAsync(
+                        testBase.rgName,
+                        testBase.serviceName,
+                        secretPropertyId);
+
+                    Assert.NotNull(patchkvResponse);
+                    Assert.NotNull(patchkvResponse.KeyVault);
+                    Assert.Equal("Success", patchkvResponse.KeyVault.LastStatus.Code);
 
                     // delete this property
                     testBase.client.NamedValue.Delete(

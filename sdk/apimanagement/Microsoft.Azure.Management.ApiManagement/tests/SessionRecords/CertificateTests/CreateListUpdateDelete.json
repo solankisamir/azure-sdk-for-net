@@ -7,7 +7,7 @@
       "RequestBody": "{\r\n  \"properties\": {\r\n    \"publisherEmail\": \"apim@autorestsdk.com\",\r\n    \"publisherName\": \"autorestsdk\"\r\n  },\r\n  \"sku\": {\r\n    \"name\": \"Developer\",\r\n    \"capacity\": 1\r\n  },\r\n  \"identity\": {\r\n    \"type\": \"SystemAssigned\"\r\n  },\r\n  \"location\": \"CentralUS\",\r\n  \"tags\": {\r\n    \"tag1\": \"value1\",\r\n    \"tag2\": \"value2\",\r\n    \"tag3\": \"value3\"\r\n  }\r\n}",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "65391a8a-31a1-4f37-a882-6e20f33e99d7"
+          "2bf3f76f-f440-41c2-a751-4720eea7af97"
         ],
         "Accept-Language": [
           "en-US"
@@ -39,8 +39,8 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "c50a7b45-8ead-41bd-925e-da3d5c3c8268",
-          "a788200c-61c9-4614-a715-9dd77f315415"
+          "feb622b7-a0b2-4ec7-957e-561bd45ee4de",
+          "b10c3a71-e7d4-4e2a-b212-77d7f99d070a"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -49,16 +49,16 @@
           "1199"
         ],
         "x-ms-correlation-request-id": [
-          "abaede78-b298-4742-b610-b6528d8e2b1b"
+          "26fb040d-252e-4a12-87a0-9716b474055b"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203615Z:abaede78-b298-4742-b610-b6528d8e2b1b"
+          "WESTCENTRALUS:20210420T000424Z:26fb040d-252e-4a12-87a0-9716b474055b"
         ],
         "X-Content-Type-Options": [
           "nosniff"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:14 GMT"
+          "Tue, 20 Apr 2021 00:04:24 GMT"
         ],
         "Content-Length": [
           "2344"
@@ -80,7 +80,7 @@
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "525bd96b-bd15-4294-ad73-b62728601c4c"
+          "61442b0b-cb5a-45a0-bef6-2968d5c60e0d"
         ],
         "Accept-Language": [
           "en-US"
@@ -106,7 +106,7 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "d8eebdf6-db20-45c7-9ccb-7dea6b055b7f"
+          "5baa29e2-44ba-4654-ad00-328a3a5cfe4a"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -115,16 +115,16 @@
           "11999"
         ],
         "x-ms-correlation-request-id": [
-          "ba831d41-585c-485b-9656-18a9525dea60"
+          "1305a247-006a-4195-a177-130d723bfd74"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203615Z:ba831d41-585c-485b-9656-18a9525dea60"
+          "WESTCENTRALUS:20210420T000425Z:1305a247-006a-4195-a177-130d723bfd74"
         ],
         "X-Content-Type-Options": [
           "nosniff"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:15 GMT"
+          "Tue, 20 Apr 2021 00:04:24 GMT"
         ],
         "Content-Length": [
           "2344"
@@ -146,7 +146,7 @@
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "e7482a8d-5d4e-40af-9e16-effccdf4f68a"
+          "90bf40f4-3ab2-4533-84d2-2d3a9c295194"
         ],
         "Accept-Language": [
           "en-US"
@@ -172,7 +172,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "5311917d-56a2-4bd5-88f2-051feb401b0d"
+          "9b0662ab-a401-4be7-94aa-8851487ef697"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -181,13 +181,13 @@
           "11998"
         ],
         "x-ms-correlation-request-id": [
-          "1113d4cc-60f3-45da-9c37-84351d33380b"
+          "8d0989a0-6fe3-4dda-81b7-58d9259b96ae"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203615Z:1113d4cc-60f3-45da-9c37-84351d33380b"
+          "WESTCENTRALUS:20210420T000425Z:8d0989a0-6fe3-4dda-81b7-58d9259b96ae"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:15 GMT"
+          "Tue, 20 Apr 2021 00:04:24 GMT"
         ],
         "Content-Length": [
           "34"
@@ -209,7 +209,7 @@
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "d43cb940-9426-4fc9-9e03-0acbd077c207"
+          "62fabed1-e4b7-46cd-b893-be6748f7c1a5"
         ],
         "Accept-Language": [
           "en-US"
@@ -235,7 +235,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "3eba61c7-a595-404b-935b-19b38b8a57ce"
+          "2b4f6574-3066-4e40-a6a6-351fbe85f668"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -244,16 +244,16 @@
           "11995"
         ],
         "x-ms-correlation-request-id": [
-          "7508d326-b5d6-4b93-86e1-0ffa433d3265"
+          "93388521-d582-49f4-9d7e-bc5547d46d71"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203618Z:7508d326-b5d6-4b93-86e1-0ffa433d3265"
+          "WESTCENTRALUS:20210420T000428Z:93388521-d582-49f4-9d7e-bc5547d46d71"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:17 GMT"
+          "Tue, 20 Apr 2021 00:04:28 GMT"
         ],
         "Content-Length": [
-          "1393"
+          "1395"
         ],
         "Content-Type": [
           "application/json; charset=utf-8"
@@ -262,7 +262,7 @@
           "-1"
         ]
       },
-      "ResponseBody": "{\r\n  \"value\": [\r\n    {\r\n      \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId166\",\r\n      \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n      \"name\": \"certificateId166\",\r\n      \"properties\": {\r\n        \"subject\": \"CN=*.msitesting.net\",\r\n        \"thumbprint\": \"8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2\",\r\n        \"expirationDate\": \"2036-01-01T07:00:00Z\",\r\n        \"hasPrivateKey\": true\r\n      }\r\n    },\r\n    {\r\n      \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5459\",\r\n      \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n      \"name\": \"kvcertificateId5459\",\r\n      \"properties\": {\r\n        \"subject\": \"CN=contoso.com\",\r\n        \"thumbprint\": \"85D784035E2A43A6ABF7A9B2DC51263F63E0FA4C\",\r\n        \"expirationDate\": \"2022-04-16T19:21:21Z\",\r\n        \"hasPrivateKey\": true,\r\n        \"keyVault\": {\r\n          \"secretIdentifier\": \"https://jikangsdkkeyvault.vault.azure.net/secrets/sdkcert1\",\r\n          \"identityClientId\": null,\r\n          \"lastStatus\": {\r\n            \"code\": \"Success\",\r\n            \"timeStampUtc\": \"2021-04-16T20:36:16.8465013Z\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"count\": 2\r\n}",
+      "ResponseBody": "{\r\n  \"value\": [\r\n    {\r\n      \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId1793\",\r\n      \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n      \"name\": \"certificateId1793\",\r\n      \"properties\": {\r\n        \"subject\": \"CN=*.msitesting.net\",\r\n        \"thumbprint\": \"8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2\",\r\n        \"expirationDate\": \"2036-01-01T07:00:00Z\",\r\n        \"hasPrivateKey\": true\r\n      }\r\n    },\r\n    {\r\n      \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5573\",\r\n      \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n      \"name\": \"kvcertificateId5573\",\r\n      \"properties\": {\r\n        \"subject\": \"CN=contoso.com\",\r\n        \"thumbprint\": \"85D784035E2A43A6ABF7A9B2DC51263F63E0FA4C\",\r\n        \"expirationDate\": \"2022-04-16T19:21:21Z\",\r\n        \"hasPrivateKey\": true,\r\n        \"keyVault\": {\r\n          \"secretIdentifier\": \"https://jikangsdkkeyvault.vault.azure.net/secrets/sdkcert1\",\r\n          \"identityClientId\": null,\r\n          \"lastStatus\": {\r\n            \"code\": \"Success\",\r\n            \"timeStampUtc\": \"2021-04-20T00:04:27.7463971Z\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"count\": 2\r\n}",
       "StatusCode": 200
     },
     {
@@ -272,7 +272,7 @@
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "fc280014-e736-4150-bd6d-0017493023d2"
+          "218fa4b2-4213-4919-86b3-8219d7de02c0"
         ],
         "Accept-Language": [
           "en-US"
@@ -298,7 +298,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "f0ccead7-31e0-4791-af7b-2866422f5fb8"
+          "51300ec4-f1ea-4537-a9d0-97c0c66136a9"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -307,13 +307,13 @@
           "11994"
         ],
         "x-ms-correlation-request-id": [
-          "34c5164b-6e24-4172-9df7-aa44f3550b3a"
+          "97ce3730-7425-4b41-a6d0-b51007b70c10"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203619Z:34c5164b-6e24-4172-9df7-aa44f3550b3a"
+          "WESTCENTRALUS:20210420T000429Z:97ce3730-7425-4b41-a6d0-b51007b70c10"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:18 GMT"
+          "Tue, 20 Apr 2021 00:04:28 GMT"
         ],
         "Content-Length": [
           "34"
@@ -329,13 +329,13 @@
       "StatusCode": 200
     },
     {
-      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId166?api-version=2020-12-01",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMvY2VydGlmaWNhdGVJZDE2Nj9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
+      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId1793?api-version=2020-12-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMvY2VydGlmaWNhdGVJZDE3OTM/YXBpLXZlcnNpb249MjAyMC0xMi0wMQ==",
       "RequestMethod": "PUT",
       "RequestBody": "{\r\n  \"properties\": {\r\n    \"data\": \"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\",\r\n    \"password\": \"Password\"\r\n  }\r\n}",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "c0e4b1f5-4fb3-4702-a5ad-d24e502fc5a7"
+          "c4a41d54-4e54-403e-a529-fe80198cbd2d"
         ],
         "Accept-Language": [
           "en-US"
@@ -361,7 +361,7 @@
           "no-cache"
         ],
         "ETag": [
-          "\"AAAAAAAAfdI=\""
+          "\"AAAAAAAAfks=\""
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -370,7 +370,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "f7315875-9de7-483f-921b-73b1a3187039"
+          "4d57ecd5-af59-45f9-81d3-7b231d53abc0"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -379,16 +379,16 @@
           "1198"
         ],
         "x-ms-correlation-request-id": [
-          "57c042e5-7ac3-41ec-9f96-c08a09b7f37c"
+          "547d9528-969a-4245-a56b-06db3dc11102"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203616Z:57c042e5-7ac3-41ec-9f96-c08a09b7f37c"
+          "WESTCENTRALUS:20210420T000426Z:547d9528-969a-4245-a56b-06db3dc11102"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:15 GMT"
+          "Tue, 20 Apr 2021 00:04:25 GMT"
         ],
         "Content-Length": [
-          "482"
+          "484"
         ],
         "Content-Type": [
           "application/json; charset=utf-8"
@@ -397,17 +397,17 @@
           "-1"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId166\",\r\n  \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n  \"name\": \"certificateId166\",\r\n  \"properties\": {\r\n    \"subject\": \"CN=*.msitesting.net\",\r\n    \"thumbprint\": \"8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2\",\r\n    \"expirationDate\": \"2036-01-01T07:00:00Z\",\r\n    \"hasPrivateKey\": true\r\n  }\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId1793\",\r\n  \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n  \"name\": \"certificateId1793\",\r\n  \"properties\": {\r\n    \"subject\": \"CN=*.msitesting.net\",\r\n    \"thumbprint\": \"8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2\",\r\n    \"expirationDate\": \"2036-01-01T07:00:00Z\",\r\n    \"hasPrivateKey\": true\r\n  }\r\n}",
       "StatusCode": 201
     },
     {
-      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId166?api-version=2020-12-01",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMvY2VydGlmaWNhdGVJZDE2Nj9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
+      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId1793?api-version=2020-12-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMvY2VydGlmaWNhdGVJZDE3OTM/YXBpLXZlcnNpb249MjAyMC0xMi0wMQ==",
       "RequestMethod": "GET",
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "3f9479c7-9058-4d18-94d1-b91d8e0e3a21"
+          "55805adc-55c1-4faa-919c-56985de6661d"
         ],
         "Accept-Language": [
           "en-US"
@@ -427,7 +427,7 @@
           "no-cache"
         ],
         "ETag": [
-          "\"AAAAAAAAfdI=\""
+          "\"AAAAAAAAfks=\""
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -436,7 +436,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "0a162ebd-a610-4eaa-bb46-679c4304a9a1"
+          "396c8b20-0e6e-4b1d-89c5-e7bab5b11b42"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -445,16 +445,16 @@
           "11997"
         ],
         "x-ms-correlation-request-id": [
-          "b69a5823-af97-4ea1-9821-568c5498797f"
+          "81430c7c-99b2-4dee-80b4-984c82a259f2"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203616Z:b69a5823-af97-4ea1-9821-568c5498797f"
+          "WESTCENTRALUS:20210420T000426Z:81430c7c-99b2-4dee-80b4-984c82a259f2"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:16 GMT"
+          "Tue, 20 Apr 2021 00:04:25 GMT"
         ],
         "Content-Length": [
-          "482"
+          "484"
         ],
         "Content-Type": [
           "application/json; charset=utf-8"
@@ -463,17 +463,17 @@
           "-1"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId166\",\r\n  \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n  \"name\": \"certificateId166\",\r\n  \"properties\": {\r\n    \"subject\": \"CN=*.msitesting.net\",\r\n    \"thumbprint\": \"8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2\",\r\n    \"expirationDate\": \"2036-01-01T07:00:00Z\",\r\n    \"hasPrivateKey\": true\r\n  }\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId1793\",\r\n  \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n  \"name\": \"certificateId1793\",\r\n  \"properties\": {\r\n    \"subject\": \"CN=*.msitesting.net\",\r\n    \"thumbprint\": \"8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2\",\r\n    \"expirationDate\": \"2036-01-01T07:00:00Z\",\r\n    \"hasPrivateKey\": true\r\n  }\r\n}",
       "StatusCode": 200
     },
     {
-      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5459?api-version=2020-12-01",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMva3ZjZXJ0aWZpY2F0ZUlkNTQ1OT9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
+      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5573?api-version=2020-12-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMva3ZjZXJ0aWZpY2F0ZUlkNTU3Mz9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
       "RequestMethod": "PUT",
       "RequestBody": "{\r\n  \"properties\": {\r\n    \"keyVault\": {\r\n      \"secretIdentifier\": \"https://jikangsdkkeyvault.vault.azure.net/secrets/sdkcert1\"\r\n    }\r\n  }\r\n}",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "16a0b1a0-0f7a-411e-b80b-58fc622117a6"
+          "1dc17e53-084d-42b2-a387-f9207e0db5be"
         ],
         "Accept-Language": [
           "en-US"
@@ -499,7 +499,7 @@
           "no-cache"
         ],
         "ETag": [
-          "\"AAAAAAAAfdU=\""
+          "\"AAAAAAAAfk4=\""
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -508,7 +508,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "9be64acc-e93e-42c9-85a0-f68a30a58090"
+          "1d90e034-7444-41ae-87fe-8c6e03cfced3"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -517,13 +517,13 @@
           "1197"
         ],
         "x-ms-correlation-request-id": [
-          "2f64082e-d627-4b3d-af29-5b4d1573f91f"
+          "2895be26-ab33-46e6-af0b-2c81af0741e1"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203617Z:2f64082e-d627-4b3d-af29-5b4d1573f91f"
+          "WESTCENTRALUS:20210420T000427Z:2895be26-ab33-46e6-af0b-2c81af0741e1"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:17 GMT"
+          "Tue, 20 Apr 2021 00:04:26 GMT"
         ],
         "Content-Length": [
           "748"
@@ -535,17 +535,17 @@
           "-1"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5459\",\r\n  \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n  \"name\": \"kvcertificateId5459\",\r\n  \"properties\": {\r\n    \"subject\": \"CN=contoso.com\",\r\n    \"thumbprint\": \"85D784035E2A43A6ABF7A9B2DC51263F63E0FA4C\",\r\n    \"expirationDate\": \"2022-04-16T19:21:21Z\",\r\n    \"hasPrivateKey\": true,\r\n    \"keyVault\": {\r\n      \"secretIdentifier\": \"https://jikangsdkkeyvault.vault.azure.net/secrets/sdkcert1\",\r\n      \"identityClientId\": null,\r\n      \"lastStatus\": {\r\n        \"code\": \"Success\",\r\n        \"timeStampUtc\": \"2021-04-16T20:36:16.8465013Z\"\r\n      }\r\n    }\r\n  }\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5573\",\r\n  \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n  \"name\": \"kvcertificateId5573\",\r\n  \"properties\": {\r\n    \"subject\": \"CN=contoso.com\",\r\n    \"thumbprint\": \"85D784035E2A43A6ABF7A9B2DC51263F63E0FA4C\",\r\n    \"expirationDate\": \"2022-04-16T19:21:21Z\",\r\n    \"hasPrivateKey\": true,\r\n    \"keyVault\": {\r\n      \"secretIdentifier\": \"https://jikangsdkkeyvault.vault.azure.net/secrets/sdkcert1\",\r\n      \"identityClientId\": null,\r\n      \"lastStatus\": {\r\n        \"code\": \"Success\",\r\n        \"timeStampUtc\": \"2021-04-20T00:04:26.6087306Z\"\r\n      }\r\n    }\r\n  }\r\n}",
       "StatusCode": 201
     },
     {
-      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5459?api-version=2020-12-01",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMva3ZjZXJ0aWZpY2F0ZUlkNTQ1OT9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
+      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5573?api-version=2020-12-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMva3ZjZXJ0aWZpY2F0ZUlkNTU3Mz9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
       "RequestMethod": "GET",
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "6aba8a6d-bb2a-4429-97fa-eeaa6f8cb90e"
+          "aafa369f-ee50-4b55-9d17-bbcf55118583"
         ],
         "Accept-Language": [
           "en-US"
@@ -565,7 +565,7 @@
           "no-cache"
         ],
         "ETag": [
-          "\"AAAAAAAAfdU=\""
+          "\"AAAAAAAAfk4=\""
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -574,7 +574,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "1ecab06b-d538-411f-9e9a-6bdb9c160397"
+          "673e41cc-98a8-4fdd-93f5-406689e4aa6d"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -583,13 +583,13 @@
           "11996"
         ],
         "x-ms-correlation-request-id": [
-          "10bcd0a0-c6c0-45a0-9385-41ff300fb3ce"
+          "d8ee0b39-9672-41b3-b7d1-adb553f02b71"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203618Z:10bcd0a0-c6c0-45a0-9385-41ff300fb3ce"
+          "WESTCENTRALUS:20210420T000427Z:d8ee0b39-9672-41b3-b7d1-adb553f02b71"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:17 GMT"
+          "Tue, 20 Apr 2021 00:04:27 GMT"
         ],
         "Content-Length": [
           "748"
@@ -601,20 +601,86 @@
           "-1"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5459\",\r\n  \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n  \"name\": \"kvcertificateId5459\",\r\n  \"properties\": {\r\n    \"subject\": \"CN=contoso.com\",\r\n    \"thumbprint\": \"85D784035E2A43A6ABF7A9B2DC51263F63E0FA4C\",\r\n    \"expirationDate\": \"2022-04-16T19:21:21Z\",\r\n    \"hasPrivateKey\": true,\r\n    \"keyVault\": {\r\n      \"secretIdentifier\": \"https://jikangsdkkeyvault.vault.azure.net/secrets/sdkcert1\",\r\n      \"identityClientId\": null,\r\n      \"lastStatus\": {\r\n        \"code\": \"Success\",\r\n        \"timeStampUtc\": \"2021-04-16T20:36:16.8465013Z\"\r\n      }\r\n    }\r\n  }\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5573\",\r\n  \"type\": \"Microsoft.ApiManagement/service/certificates\",\r\n  \"name\": \"kvcertificateId5573\",\r\n  \"properties\": {\r\n    \"subject\": \"CN=contoso.com\",\r\n    \"thumbprint\": \"85D784035E2A43A6ABF7A9B2DC51263F63E0FA4C\",\r\n    \"expirationDate\": \"2022-04-16T19:21:21Z\",\r\n    \"hasPrivateKey\": true,\r\n    \"keyVault\": {\r\n      \"secretIdentifier\": \"https://jikangsdkkeyvault.vault.azure.net/secrets/sdkcert1\",\r\n      \"identityClientId\": null,\r\n      \"lastStatus\": {\r\n        \"code\": \"Success\",\r\n        \"timeStampUtc\": \"2021-04-20T00:04:26.6087306Z\"\r\n      }\r\n    }\r\n  }\r\n}",
       "StatusCode": 200
     },
     {
-      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId166?api-version=2020-12-01",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMvY2VydGlmaWNhdGVJZDE2Nj9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
+      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5573/refreshSecret?api-version=2020-12-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMva3ZjZXJ0aWZpY2F0ZUlkNTU3My9yZWZyZXNoU2VjcmV0P2FwaS12ZXJzaW9uPTIwMjAtMTItMDE=",
+      "RequestMethod": "POST",
+      "RequestBody": "",
+      "RequestHeaders": {
+        "x-ms-client-request-id": [
+          "7f8bd926-016a-4b64-a9bc-bb8d7a3f8513"
+        ],
+        "Accept-Language": [
+          "en-US"
+        ],
+        "User-Agent": [
+          "FxVersion/4.6.29916.01",
+          "OSName/Windows",
+          "OSVersion/Microsoft.Windows.10.0.19042.",
+          "Microsoft.Azure.Management.ApiManagement.ApiManagementClient/7.0.0.0"
+        ]
+      },
+      "ResponseHeaders": {
+        "Cache-Control": [
+          "no-cache"
+        ],
+        "Pragma": [
+          "no-cache"
+        ],
+        "ETag": [
+          "\"AAAAAAAAflA=\""
+        ],
+        "Strict-Transport-Security": [
+          "max-age=31536000; includeSubDomains"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "x-ms-request-id": [
+          "920f626b-b6ff-4f6a-91c4-a9dcfdf9d4c7"
+        ],
+        "Server": [
+          "Microsoft-HTTPAPI/2.0"
+        ],
+        "x-ms-ratelimit-remaining-subscription-writes": [
+          "1199"
+        ],
+        "x-ms-correlation-request-id": [
+          "e22541c9-2fba-41b1-908a-590b7ffc81f1"
+        ],
+        "x-ms-routing-request-id": [
+          "WESTCENTRALUS:20210420T000428Z:e22541c9-2fba-41b1-908a-590b7ffc81f1"
+        ],
+        "Date": [
+          "Tue, 20 Apr 2021 00:04:27 GMT"
+        ],
+        "Content-Length": [
+          "381"
+        ],
+        "Content-Type": [
+          "application/json; charset=utf-8"
+        ],
+        "Expires": [
+          "-1"
+        ]
+      },
+      "ResponseBody": "{\r\n  \"id\": \"/certificates/kvcertificateId5573\",\r\n  \"subject\": \"CN=contoso.com\",\r\n  \"thumbprint\": \"85D784035E2A43A6ABF7A9B2DC51263F63E0FA4C\",\r\n  \"expirationDate\": \"2022-04-16T19:21:21Z\",\r\n  \"hasPrivateKey\": true,\r\n  \"keyVault\": {\r\n    \"secretIdentifier\": \"https://jikangsdkkeyvault.vault.azure.net/secrets/sdkcert1\",\r\n    \"identityClientId\": null,\r\n    \"lastStatus\": {\r\n      \"code\": \"Success\",\r\n      \"timeStampUtc\": \"2021-04-20T00:04:27.7463971Z\"\r\n    }\r\n  }\r\n}",
+      "StatusCode": 200
+    },
+    {
+      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId1793?api-version=2020-12-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMvY2VydGlmaWNhdGVJZDE3OTM/YXBpLXZlcnNpb249MjAyMC0xMi0wMQ==",
       "RequestMethod": "DELETE",
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "19eb0446-cbed-42b4-84ab-294996e30b53"
+          "e1dd2b53-f38f-4385-a3c6-c447b85620f8"
         ],
         "If-Match": [
-          "\"AAAAAAAAfdI=\""
+          "\"AAAAAAAAfks=\""
         ],
         "Accept-Language": [
           "en-US"
@@ -640,7 +706,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "5ac51823-0b0b-441f-88c1-71e41eae9c90"
+          "28f6cc22-6e10-436e-a7ee-b5b7e8fe2ac9"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -649,13 +715,13 @@
           "14999"
         ],
         "x-ms-correlation-request-id": [
-          "b44ecddb-0160-4de0-8608-e8150532631a"
+          "f25ce22f-e032-4585-b464-9e87a2df1872"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203618Z:b44ecddb-0160-4de0-8608-e8150532631a"
+          "WESTCENTRALUS:20210420T000428Z:f25ce22f-e032-4585-b464-9e87a2df1872"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:17 GMT"
+          "Tue, 20 Apr 2021 00:04:28 GMT"
         ],
         "Expires": [
           "-1"
@@ -668,13 +734,13 @@
       "StatusCode": 200
     },
     {
-      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId166?api-version=2020-12-01",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMvY2VydGlmaWNhdGVJZDE2Nj9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
+      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/certificateId1793?api-version=2020-12-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMvY2VydGlmaWNhdGVJZDE3OTM/YXBpLXZlcnNpb249MjAyMC0xMi0wMQ==",
       "RequestMethod": "DELETE",
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "a6663ec2-7ff0-4564-b644-2d145afdb533"
+          "21b45629-29c8-437b-b83c-849207d62c89"
         ],
         "If-Match": [
           "*"
@@ -703,7 +769,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "b8dc9033-c6dd-4f6a-8253-3592df509d97"
+          "4101e5da-3b67-4edf-94cd-8ff7ca0e03b8"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -712,13 +778,13 @@
           "14997"
         ],
         "x-ms-correlation-request-id": [
-          "3e8ff046-6d85-484a-bdab-caa5dc2eb667"
+          "8fe23f2e-c16c-4b27-bf01-7ef3f2c80eb6"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203619Z:3e8ff046-6d85-484a-bdab-caa5dc2eb667"
+          "WESTCENTRALUS:20210420T000429Z:8fe23f2e-c16c-4b27-bf01-7ef3f2c80eb6"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:19 GMT"
+          "Tue, 20 Apr 2021 00:04:28 GMT"
         ],
         "Expires": [
           "-1"
@@ -728,16 +794,16 @@
       "StatusCode": 204
     },
     {
-      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5459?api-version=2020-12-01",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMva3ZjZXJ0aWZpY2F0ZUlkNTQ1OT9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
+      "RequestUri": "/subscriptions/bab08e11-7b12-4354-9fd1-4b5d64d40b68/resourceGroups/Api-Default-CentralUS/providers/Microsoft.ApiManagement/service/sdktestservice/certificates/kvcertificateId5573?api-version=2020-12-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvYmFiMDhlMTEtN2IxMi00MzU0LTlmZDEtNGI1ZDY0ZDQwYjY4L3Jlc291cmNlR3JvdXBzL0FwaS1EZWZhdWx0LUNlbnRyYWxVUy9wcm92aWRlcnMvTWljcm9zb2Z0LkFwaU1hbmFnZW1lbnQvc2VydmljZS9zZGt0ZXN0c2VydmljZS9jZXJ0aWZpY2F0ZXMva3ZjZXJ0aWZpY2F0ZUlkNTU3Mz9hcGktdmVyc2lvbj0yMDIwLTEyLTAx",
       "RequestMethod": "DELETE",
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "38064361-9789-4c80-b7a5-0c4123105054"
+          "bd210627-0a7a-40db-af11-970c734edc55"
         ],
         "If-Match": [
-          "\"AAAAAAAAfdU=\""
+          "*"
         ],
         "Accept-Language": [
           "en-US"
@@ -763,7 +829,7 @@
           "nosniff"
         ],
         "x-ms-request-id": [
-          "cc6ea366-9fa7-4206-af8c-e9be2cb2bece"
+          "34939d19-b68e-4d78-bac7-272cfd18a248"
         ],
         "Server": [
           "Microsoft-HTTPAPI/2.0"
@@ -772,13 +838,13 @@
           "14998"
         ],
         "x-ms-correlation-request-id": [
-          "401eb99d-c752-4ec2-96a1-1fa05115f016"
+          "d6bf0ef3-f1a3-4bb2-b7af-5e56b4ff2c14"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS:20210416T203618Z:401eb99d-c752-4ec2-96a1-1fa05115f016"
+          "WESTCENTRALUS:20210420T000429Z:d6bf0ef3-f1a3-4bb2-b7af-5e56b4ff2c14"
         ],
         "Date": [
-          "Fri, 16 Apr 2021 20:36:18 GMT"
+          "Tue, 20 Apr 2021 00:04:28 GMT"
         ],
         "Expires": [
           "-1"
@@ -793,8 +859,8 @@
   ],
   "Names": {
     "CreateListUpdateDelete": [
-      "certificateId166",
-      "kvcertificateId5459"
+      "certificateId1793",
+      "kvcertificateId5573"
     ]
   },
   "Variables": {
