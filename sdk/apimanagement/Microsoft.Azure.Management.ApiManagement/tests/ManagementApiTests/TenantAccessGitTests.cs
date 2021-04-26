@@ -40,7 +40,6 @@ namespace ApiManagement.Tests.ManagementApiTests
                 Assert.NotNull(getResponse);
                 Assert.True(getResponse.Enabled); // git access is always enabled
                 Assert.Equal("git", getResponse.PrincipalId);
-                
 
                 var secretsResponse = await testBase.client.TenantAccess.ListSecretsAsync(
                     testBase.rgName,

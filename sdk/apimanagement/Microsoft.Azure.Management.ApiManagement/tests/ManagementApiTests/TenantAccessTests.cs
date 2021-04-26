@@ -42,12 +42,15 @@ namespace ApiManagement.Tests.ManagementApiTests
                     {
                         Enabled = true
                     };
-                    testBase.client.TenantAccess.Update(
+                    var getUpdateResponse = testBase.client.TenantAccess.Update(
                         testBase.rgName,
                         testBase.serviceName,
                         parameters,
                         "access",
                         "*");
+
+                    Assert.NotNull(getUpdateResponse);
+                    Assert.True(getUpdateResponse.Enabled);
 
                     var getHttpResponse = await testBase.client.TenantAccess.GetWithHttpMessagesAsync(
                         testBase.rgName,
