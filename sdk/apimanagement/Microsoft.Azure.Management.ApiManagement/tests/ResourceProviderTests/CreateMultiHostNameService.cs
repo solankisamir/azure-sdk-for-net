@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ResourceProviderTests
     {
         [Fact]
         [Trait("owner", "sasolank")]
-        public void CreateMultiHostNameService()
+        public void CreateMultiHostNameZoneAwareService()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
             using (MockContext context = MockContext.Start(this.GetType()))
@@ -29,8 +29,13 @@ namespace ApiManagement.Tests.ResourceProviderTests
 
                 var domainOwnershipIdentifierResult = testBase.client.ApiManagementService.GetDomainOwnershipIdentifier();
                 Assert.NotNull(domainOwnershipIdentifierResult);
+                Assert.NotEmpty(domainOwnershipIdentifierResult.DomainOwnershipIdentifier);
 
+                testBase.serviceProperties.Zones = new[] { "1", "2" };
                 testBase.serviceProperties.Sku.Name = SkuType.Premium;
+                testBase.serviceProperties.Sku.Capacity = 2; // unit count in multiple of zones
+                testBase.location = "eastus2euap";
+                testBase.serviceProperties.Location = testBase.location;
                 var hostnameConfig1 = new HostnameConfiguration()
                 {
                     Type = HostnameType.Proxy,
@@ -91,6 +96,10 @@ namespace ApiManagement.Tests.ResourceProviderTests
                     testBase.serviceProperties.Sku.Name,
                     testBase.tags);
 
+                Assert.Equal(2, createdService.Sku.Capacity);
+                Assert.Equal(2, createdService.Zones.Count);
+                Assert.True(createdService.Zones.Contains("1"));
+                Assert.True(createdService.Zones.Contains("2"));
                 Assert.NotNull(createdService.HostnameConfigurations);
                 Assert.Equal(5, createdService.HostnameConfigurations.Count()); // customhostname config + 1 default proxy
                 var defaultHostname = new Uri(createdService.GatewayUrl).Host;
@@ -105,6 +114,8 @@ namespace ApiManagement.Tests.ResourceProviderTests
                     Assert.Equal(hostnameConfig.Type, hostnameConfiguration.Type);
                     Assert.NotNull(hostnameConfiguration.Certificate);
                     Assert.NotNull(hostnameConfiguration.Certificate.Subject);
+                    Assert.Null(hostnameConfig.IdentityClientId);
+                    Assert.Null(hostnameConfig.KeyVaultId);
                     Assert.Equal(cert.Thumbprint, hostnameConfiguration.Certificate.Thumbprint);
 
                     if (HostnameType.Proxy == hostnameConfiguration.Type)
