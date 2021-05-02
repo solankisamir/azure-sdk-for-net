@@ -20,7 +20,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class LoggerTests : TestBase
     {
         [Fact]
-        [Trait("owner", "sasolank")]
+        [Trait("owner", "glfeokti")]
         public async Task CreateListUpdateDeleteEventHub()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
@@ -182,7 +182,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
-        [Trait("owner", "sasolank")]
+        [Trait("owner", "glfeokti")]
         public async Task CreateListUpdateDeleteApplicationInsights()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");

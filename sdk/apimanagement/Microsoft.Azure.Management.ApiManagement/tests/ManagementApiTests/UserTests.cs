@@ -17,7 +17,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class UserTests : TestBase
     {
         [Fact]
-        [Trait("owner", "vifedo")]
+        [Trait("owner", "jikang")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
@@ -144,7 +144,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
-        [Trait("owner", "vifedo")]
+        [Trait("owner", "jikang")]
         public void UserIdentities()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
@@ -182,7 +182,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
-        [Trait("owner", "vifedo")]
+        [Trait("owner", "jikang")]
         public void GroupsListAddRemove()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
@@ -308,7 +308,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
-        [Trait("owner", "vifedo")]
+        [Trait("owner", "jikang")]
         public void SubscriptionsList()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");

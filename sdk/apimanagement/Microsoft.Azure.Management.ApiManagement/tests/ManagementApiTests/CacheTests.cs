@@ -15,7 +15,7 @@ namespace ApiManagement.Tests.ManagementApiTests
     public class CacheTests : TestBase
     {
         [Fact]
-        [Trait("owner", "vifedo")]
+        [Trait("owner", "jikang")]
         public async Task CreateListUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");

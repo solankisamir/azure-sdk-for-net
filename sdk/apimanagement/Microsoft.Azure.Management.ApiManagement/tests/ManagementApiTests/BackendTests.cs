@@ -143,6 +143,7 @@ namespace ApiManagement.Tests.ManagementApiTests
         }
 
         [Fact]
+        [Trait("owner", "jikang")]
         public async Task ServiceFabricCreateUpdateDelete()
         {
             Environment.SetEnvironmentVariable("AZURE_TEST_MODE", "Playback");
